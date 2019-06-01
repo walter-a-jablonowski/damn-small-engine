@@ -4,7 +4,7 @@
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read the code and modify it for your needs. I added some features 2 the basic idea. Have a look at the 2 very small class files in /src.
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small class files in /src.
 
 If you like run the sample code in /sample, which is the same as below.
 
@@ -59,14 +59,14 @@ foreach( $listData as $rowValues )
 $view->list1 = $listView1;
 
 
-// or
+// Add a list alternative version
 
 $list2 = new View( 'list2_entries.html' );
 $list2->setValues( $listData );
 $view->list2 = $list2;
 
 
-// you could also add a list 2 a list
+// You could also add a list 2 a list
 
 $outerList = new ListView();
 $outerList->addView( $listView1 );

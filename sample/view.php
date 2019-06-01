@@ -48,14 +48,14 @@ foreach( $listData as $rowValues )
 $view->list1 = $listView1;
 
 
-// or
+// Add a list alternative version
 
 $list2 = new View( 'list2_entries.html' );
 $list2->setValues( $listData );
 $view->list2 = $list2;
 
 
-// you could also add a list 2 a list
+// You could also add a list 2 a list
 
 $outerList = new ListView();
 $outerList->addView( $listView1 );
