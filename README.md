@@ -1,5 +1,7 @@
 # Damn small engine
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **PHP low code templating system**
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
@@ -32,7 +34,7 @@ $view->myVal2 = ...               // Please set all values, use at least ''. If 
 
 // Add a list
 
-$listData = [
+$listData = [                     // Demo data or load from  db
   'row 1' => [
     'field 1' => 'entry 1.1',
     'field 2' => 'entry 1.2'
@@ -43,8 +45,8 @@ $listData = [
   ]
 ];
 
-$listView1 = new ListView();
-
+$listView1 = new ListView();        // Instead you may also use: $listView1 = ListView::buildList( 'list1_entry.html', $listData );
+                                    // which is just the same code packed in a static method
 foreach( $listData as $rowValues )
 {
   $entryView = new View( 'list1_entry.html' );
@@ -52,9 +54,6 @@ foreach( $listData as $rowValues )
   
   $listView1->addView( $entryView );
 }
-
-// instead you may also use $listView1 = ListView::buildList( 'list1_entry.html', $listData );
-// which is just the same code packed in a static method
 
 $view->list1 = $listView1;
 
@@ -136,6 +135,15 @@ echo $view;
 ```
 
 
+## Do
+
+* Sample list in list larger
+* Escape
+* composer stable
+* github license basge
+* buy m a coffee
+
+
 ## LICENSE
 
-Copyright (C) Walter A. Jablonowski 2018, MIT License
+Copyright (C) Walter A. Jablonowski 2018, MIT License see [LICENSE](LICENSE)

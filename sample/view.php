@@ -19,7 +19,7 @@ $view->myVal = 'sample value';    // Just add what you need used PHP's magic met
 
 // Add a list
 
-$listData = [
+$listData = [                     // Demo data or load from  db
   'row 1' => [
     'field 1' => 'entry 1.1',
     'field 2' => 'entry 1.2'
@@ -30,8 +30,8 @@ $listData = [
   ]
 ];
 
-$listView1 = new ListView();
-
+$listView1 = new ListView();        // Instead you may also use: $listView1 = ListView::buildList( 'list1_entry.html', $listData );
+                                    // which is just the same code packed in a static method
 // /*
 foreach( $listData as $rowValues )
 {
@@ -41,9 +41,6 @@ foreach( $listData as $rowValues )
   $listView1->addView( $entryView );
 }
 // */
-
-// instead you may also use $listView1 = ListView::buildList( 'list1_entry.html', $listData );
-// which is just the same code packed in a static method
 
 $view->list1 = $listView1;
 
