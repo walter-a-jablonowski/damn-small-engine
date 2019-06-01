@@ -13,7 +13,7 @@ If you like run the sample code in /sample, which is the same as below.
 
 ## Features
 
-* Just 2 small classes, few code
+* Just 2 small classes, low code
 * Build nested html views with data using `$view->subView = $subView;`
 * You can also include lists of views using
   * either ListView class (prefered)
@@ -36,7 +36,7 @@ $view->myVal2 = ...               // Please set all values, use at least ''. If 
 
 // Add a list
 
-$listData = [                     // Demo data or load from  db
+$listData = [                     // Demo data or load from db
   'row 1' => [
     'field 1' => 'entry 1.1',
     'field 2' => 'entry 1.2'
@@ -47,17 +47,17 @@ $listData = [                     // Demo data or load from  db
   ]
 ];
 
-$listView1 = new ListView();        // Instead you may also use:
-                                    // $listView1 = ListView::buildList( 'list1_entry.html', $listData );
+$listView = new ListView();         // Instead you may also use:
+                                    // $listView = ListView::buildList( 'list1_entry.html', $listData );
 foreach( $listData as $rowValues )  // which is just the same code packed in a static method
 {
   $entryView = new View( 'list1_entry.html' );
   $entryView->setValues( $rowValues );
   
-  $listView1->addView( $entryView );
+  $listView->addView( $entryView );
 }
 
-$view->list1 = $listView1;
+$view->list1 = $listView;
 
 
 // Add a list alternative version
@@ -67,10 +67,19 @@ $list2->setValues( $listData );
 $view->list2 = $list2;
 
 
-// You could also add a list 2 a list
+// You could also add: views - in a list - in a view - in a list
 
 $outerList = new ListView();
-$outerList->addView( $listView1 );
+
+for( $i=0; $i < 2; $i++ )
+{
+  $entryView = new View( 'table.html' );
+  $innerList = ListView::buildList( 'list1_entry.html', $listData );
+  $entryView->list = $innerList;
+  
+  $outerList->addView( $entryView );
+}
+
 $view->listInList = $outerList;
 
 
@@ -136,14 +145,15 @@ echo $view;
 </table>
 ```
 
+### table.html
 
-## Do
+```php
+<table>
 
-* Sample list in list larger
-* Escape
-* composer stable
-* github license basge
-* buy m a coffee
+  <?= $this->list ?>
+
+</table>
+```
 
 
 ## LICENSE
