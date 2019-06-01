@@ -14,7 +14,7 @@ require '../src/ListView.php';
 $view = new View( 'main.html' );
 
 $view->myVal = 'sample value';    // just add what you need used PHP's magic method __set(), see there
-// $view->myVal2 = ...            // Please set all args, if one is missing the class willthings
+// $view->myVal2 = ...            // Please set all values at least '', if one is missing the class will
                                   // print ## MISSING VALUE##, so you can't forget 
 
 // Add a list
