@@ -1,6 +1,6 @@
 # Damn Small Engine
 
-**PHP low code templating system**
+**PHP low code templating system - simple but powerful**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
