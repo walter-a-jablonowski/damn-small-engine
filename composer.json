@@ -1,9 +1,9 @@
 {
-    "name": "walter-a-jablonowski/DamnSmallEngine",
+    "name": "walter-a-jablonowski/damn-small-engine",
     "type": "library",
     "description": "PHP low code templating system",
     "keywords": ["template" ,"templating"],
-    "homepage": "https://github.com/walter-a-jablonowski/DamnSmallEngine",
+    "homepage": "https://github.com/walter-a-jablonowski/damn-small-engine",
     "license": "MIT",
     "authors": [
         {
