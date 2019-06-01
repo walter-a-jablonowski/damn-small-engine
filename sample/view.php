@@ -30,9 +30,9 @@ $listData = [                     // Demo data or load from  db
   ]
 ];
 
-$listView1 = new ListView();        // Instead you may also use: $listView1 = ListView::buildList( 'list1_entry.html', $listData );
-                                    // which is just the same code packed in a static method
-// /*
+$listView1 = new ListView();        // Instead you may also use:
+                                    // $listView1 = ListView::buildList( 'list1_entry.html', $listData );
+// /*                               // which is just the same code packed in a static method
 foreach( $listData as $rowValues )
 {
   $entryView = new View( 'list1_entry.html' );

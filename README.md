@@ -1,8 +1,8 @@
-# Damn small engine
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Damn Small Engine
 
 **PHP low code templating system**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
 
@@ -13,12 +13,14 @@ If you like run the sample code in /sample, which is the same as below.
 
 ## Features
 
-* Views can be nested using `$view->subView = $subView;` (you can build a tree of nested html view)
+* Just 2 small classes, few code
+* Build nested html views with data using `$view->subView = $subView;`
 * You can also include lists of views using
   * either ListView class (prefered)
-  * or as shown in sample 2 below
-* You can include a list in a list and build hierarchies
-* All nested views are procecced at the end when the complete tree has been build
+  * or as shown in sample "list alternative version" below
+* You can build a tree of nested html views (sub view can have sub views ...)
+* You can include a list in a list and build list hierarchies
+* All nested views are processed at once
 
 
 ## Sample
@@ -45,9 +47,9 @@ $listData = [                     // Demo data or load from  db
   ]
 ];
 
-$listView1 = new ListView();        // Instead you may also use: $listView1 = ListView::buildList( 'list1_entry.html', $listData );
-                                    // which is just the same code packed in a static method
-foreach( $listData as $rowValues )
+$listView1 = new ListView();        // Instead you may also use:
+                                    // $listView1 = ListView::buildList( 'list1_entry.html', $listData );
+foreach( $listData as $rowValues )  // which is just the same code packed in a static method
 {
   $entryView = new View( 'list1_entry.html' );
   $entryView->setValues( $rowValues );
@@ -146,4 +148,4 @@ echo $view;
 
 ## LICENSE
 
-Copyright (C) Walter A. Jablonowski 2018, MIT License see [LICENSE](LICENSE)
+Copyright (C) Walter A. Jablonowski 2018, MIT [License](LICENSE)
