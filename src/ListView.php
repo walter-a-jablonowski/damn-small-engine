@@ -5,7 +5,7 @@ namespace WAJ\Lib\Web\DamnSmallEngine;
 
 /*@
 
-Just a container for view classes. Add n view classes, on render() all will be rendered in a list
+Just a container for view classes. Add view classes, on render() all will be rendered in a list.
 
 USAGE:
 

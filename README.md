@@ -2,6 +2,8 @@
 
 **PHP low code templating system**
 
+This was tested using PHP 7.1.9, it should work from 5.3 and above.
+
 A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read the code and modify it for your needs. I added some features 2 the basic idea. Have a look at the 2 very small class files in /src.
 
 If you like run the sample code in /sample, which is the same as below.

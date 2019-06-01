@@ -1,0 +1,8 @@
+{
+    "name": "walter-a-jablonowski/DamnSmallEngine",
+    "description": "PHP low code templating system",
+
+    "require": {
+        "php": ">=5.3"
+    }
+}
