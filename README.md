@@ -22,6 +22,9 @@ If you like run the sample code in /sample, which is the same as below.
 * You can include a list in a list and build list hierarchies
 * All nested views are processed at once
 
+```
+composer require walter-a-jablonowski/damn-small-engine
+```
 
 ## Sample
 
@@ -103,9 +106,7 @@ echo $view;
     <h3>List 1</h3>
 
     <table>
-
       <?= $this->list1 ?>
-
     </table>
     
     
@@ -121,9 +122,7 @@ echo $view;
     <h3>List in list</h3>
 
     <table>
-
       <?= $this->listInList ?>
-  
     </table>
     
     
