@@ -12,7 +12,7 @@ USAGE:
   see readme
 
 */
-class View /*@*/
+class View extends ViewBase /*@*/
 {
   protected $scheme;
   protected $values;
@@ -75,7 +75,7 @@ class View /*@*/
   }
 
 
-  /*@ Print view as string */
+  /*@ Render view as string */
 
   public function render() /*@*/
   {
@@ -89,14 +89,6 @@ class View /*@*/
   public function __toString() /*@*/
   {
     return $this->render();
-  }
-
-
-  /*@ Escape helper */
-
-  public static function escapeEntities( $s ) /*@*/ // DEV
-  {
-    return htmlspecialchars( $s );
   }
 }
 

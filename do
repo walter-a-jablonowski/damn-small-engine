@@ -2,5 +2,5 @@
 
 * Escape
 * composer stable
-* github license basge
+* github license badge
 * buy m a coffee

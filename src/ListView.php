@@ -12,7 +12,7 @@ USAGE:
   see readme
 
 */
-class ListView /*@*/
+class ListView extends ViewBase /*@*/
 {
   protected $list;
 
@@ -51,7 +51,7 @@ class ListView /*@*/
   }
 
 
-  /*@ Print all view in $list */
+  /*@ Render all view in $list */
 
   public function render( $addBr = true ) /*@*/
   {
