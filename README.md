@@ -98,6 +98,8 @@ echo $view;
     I am a <?= $this->myVal ?>.
     
     
+    <!-- List 1 -->
+    
     <h3>List 1</h3>
 
     <table>
@@ -107,11 +109,15 @@ echo $view;
     </table>
     
     
+    <!-- List 2 -->
+    
     <h3>List 2</h3>
 
     <?= $this->list2 ?>
 
 
+    <!-- List in list -->
+    
     <h3>List in list</h3>
 
     <table>
@@ -128,7 +134,7 @@ echo $view;
 ### list1_entry.html
 
 ```php
-  <tr><td><?= $this->values['field 1'] ?></td><td><?= $this->values['field 2'] ?></td></tr>
+<tr><td><?= $this->values['field 1'] ?></td><td><?= $this->values['field 2'] ?></td></tr>
 ```
 
 ### list2_entries.html
