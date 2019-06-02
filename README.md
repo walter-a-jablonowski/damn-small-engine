@@ -59,7 +59,7 @@ $view->list0 = $listView;
 // Version 2
 
 $listView = new ListView();         // The sample above is just this code packed in a static method
-                                    // you might want 2 use this version if you need 2 make someting special
+                                    // you might want use this version if you need 2 make something special
 foreach( $listData as $rowValues )
 {
   $entryView = new View( 'list1_entry.html' );
