@@ -10,6 +10,9 @@ A simple PHP templating system, based on an idea that I saw somewhere on the int
 
 If you like run the sample code in /sample, which is the same as below.
 
+```
+composer require walter-a-jablonowski/damn-small-engine
+```
 
 ## Features
 
@@ -21,10 +24,6 @@ If you like run the sample code in /sample, which is the same as below.
 * You can build a tree of nested html views (sub view can have sub views ...)
 * You can include a list in a list and build list hierarchies
 * All nested views are processed at once
-
-```
-composer require walter-a-jablonowski/damn-small-engine
-```
 
 ## Sample
 
