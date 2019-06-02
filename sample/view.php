@@ -14,8 +14,8 @@ require '../src/ListView.php';
                                   // is htmlspecialchars() for all added values, or do it yourself
 $view = new View( 'main.html' );  
 $view->myVal = 'sample value';    // Just add what you need. Add all values, use at least ''. If one from
-// $view->myVal2 = ...            // html below is missing the class will print ## MISSING VALUE ##, so
-                                  // you will see that something is missing.
+// $view->myVal2 = ...            // html below is missing, the class will print ## MISSING VALUE ##, so
+                                  // you can see it in UI.
 
 // Add a list
 
