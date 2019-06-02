@@ -31,15 +31,17 @@ $listData = [                     // Demo data or load from db
   ]
 ];
 
+
 // Version 1
 
 $listView = ListView::buildList( 'list1_entry.html', $listData );
 $view->list0 = $listView;
 
+
 // Version 2
 
-$listView = new ListView();         // Above sample is just this code packed in a static method
-
+$listView = new ListView();         // The sample above is just this code packed in a static method
+                                    // you might want 2 use this version if you need 2 make someting special
 // /*
 foreach( $listData as $rowValues )
 {
@@ -51,6 +53,7 @@ foreach( $listData as $rowValues )
 // */
 
 $view->list1 = $listView;
+
 
 // Alternative version
 
