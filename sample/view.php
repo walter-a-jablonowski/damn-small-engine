@@ -10,7 +10,7 @@ require '../src/View.php';
 require '../src/ListView.php';
 
 
-// Make a view, add values        // You could add View::ESCAPE_ALL_VALUES in View( ) which
+// Make a view, add values        // You could add View( ..., View::ESCAPE_ALL_VALUES ) which
                                   // is htmlspecialchars() for all added values, or do it yourself
 $view = new View( 'main.html' );  
 $view->myVal = 'sample value';    // Just add what you need. Add all values, use at least ''. If one from
