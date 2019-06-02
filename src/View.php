@@ -14,37 +14,56 @@ USAGE:
 */
 class View extends ViewBase /*@*/
 {
+  const ESCAPE_ALL_VALUES = true;
+
   protected $scheme;
   protected $values;
+  protected $escapeAllValues;
 
 
   /*@
 
   ARGS:
+
     $scheme: file that contains html for this view
+    $escapeAllValues: if true all values should be html escaped on add
 
   */
-  public function __construct( $scheme ) /*@*/
+  public function __construct( $scheme, $escapeAllValues = false ) /*@*/
   {
     if( ! file_exists( $scheme ))
-      throw new \Exception('DamnSmallEngine: html file missing');
-    
+      throw new \Exception('Damn Small Engine: html file missing');
+  
     $this->scheme = $scheme;
+    $this->escapeAllValues = $escapeAllValues;
   }
 
 
-  /*@ Replace all values */
+  /*@
   
+  Replace all values
+
+  TASKS:
+    - escapeAllValues recursive
+  
+  */
   public function setValues( $values ) /*@*/
   {
-    $this->values = $values;
+    if( $this->escapeAllValues )
+      foreach( $values as $name => $value )
+        $this->values[$name] = ViewBase::escapeEntities($value);
+    else
+      $this->values = $values;
   }
 
   /*@ Set a value using `$myView->anyName = 'val';` see PHP magic methods */
   
   public function __set( $name, $value ) /*@*/
   {
-    $this->values[$name] = $value;
+    if( $this->escapeAllValues )
+      $this->values[$name] = ViewBase::escapeEntities($value);
+    else
+      $this->values[$name] = $value;
   }
 
 
@@ -89,6 +108,14 @@ class View extends ViewBase /*@*/
   public function __toString() /*@*/
   {
     return $this->render();
+  }
+
+
+  /*@ Escape helper */
+
+  public static function escapeEntities( $s ) /*@*/ // DEV
+  {
+    return htmlspecialchars( $s );
   }
 }
 

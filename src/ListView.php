@@ -17,23 +17,18 @@ class ListView extends ViewBase /*@*/
   protected $list;
 
 
-  public function __construct()
-  {
-  }
-
-
-  /*@ Builder */
+  /*@ Builds a list class with View instances from given values */
   
-  public static function buildList( $scheme, $values ) /*@*/
+  public static function buildList( $scheme, $values, $escapeAllValues = false ) /*@*/
   {
     if( ! file_exists( $scheme ))
-      throw new \Exception('DamnSmallEngine: html file missing');
+      throw new \Exception('Damn Small Engine: html file missing');
 
     $listView = new ListView();
 
     foreach( $values as $rowValues )
     {
-      $entryView = new View( $scheme );
+      $entryView = new View( $scheme, $escapeAllValues );
       $entryView->setValues( $rowValues );
       
       $listView->addView( $entryView );
