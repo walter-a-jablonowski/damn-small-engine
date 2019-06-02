@@ -28,13 +28,13 @@ composer require walter-a-jablonowski/damn-small-engine
 ## Sample
 
 ```php
-// Make a view, add values        // You could add View::ESCAPE_ALL_VALUES here which is
-                                  // htmlspecialchars() for all added values, or do it
+// Make a view, add values        // You could add View::ESCAPE_ALL_VALUES in View( ) which
+                                  // is htmlspecialchars() for all added values, or do it
 $view = new View( 'main.html' );  // yourself
 
 $view->myVal = 'sample value';    // Just add what you need used PHP's magic method __set(), see there
 $view->myVal2 = ...               // Please set all values, use at least ''. If one is missing the class will
-                                  // print ## MISSING VALUE ##, so you will see in UI that something is missing.
+                                  // print ## MISSING VALUE ##, so you will see that something is missing.
 
 // Add a list
 
@@ -49,9 +49,16 @@ $listData = [                     // Demo data or load from db
   ]
 ];
 
-$listView = new ListView();         // Instead you may also use:
-                                    // $listView = ListView::buildList( 'list1_entry.html', $listData );
-foreach( $listData as $rowValues )  // which is just the same code packed in a static method
+// Version 1
+
+$listView = ListView::buildList( 'list1_entry.html', $listData );
+$view->list0 = $listView;
+
+// Version 2
+
+$listView = new ListView();         // Above sample is just this code packed in a static method
+
+foreach( $listData as $rowValues )
 {
   $entryView = new View( 'list1_entry.html' );
   $entryView->setValues( $rowValues );
@@ -61,8 +68,7 @@ foreach( $listData as $rowValues )  // which is just the same code packed in a s
 
 $view->list1 = $listView;
 
-
-// Add a list alternative version
+// Alternative version
 
 $list2 = new View( 'list2_entries.html' );
 $list2->setValues( $listData );
@@ -98,7 +104,16 @@ echo $view;
   <body>
 
     I am a <?= $this->myVal ?>.
-    
+
+
+    <!-- List 0 -->
+
+    <h3>List</h3>
+
+    <table>
+      <?= $this->list0 ?>
+    </table>
+
     
     <!-- List 1 -->
     
