@@ -29,12 +29,11 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ```php
 // Make a view, add values        // You could add View::ESCAPE_ALL_VALUES in View( ) which
-                                  // is htmlspecialchars() for all added values, or do it
-$view = new View( 'main.html' );  // yourself
-
-$view->myVal = 'sample value';    // Just add what you need used PHP's magic method __set(), see there
-$view->myVal2 = ...               // Please set all values, use at least ''. If one is missing the class will
-                                  // print ## MISSING VALUE ##, so you will see that something is missing.
+                                  // is htmlspecialchars() for all added values, or do it yourself
+$view = new View( 'main.html' );  
+$view->myVal = 'sample value';    // Just add what you need. Add all values, use at least ''. If one from
+// $view->myVal2 = ...            // html below is missing the class will print ## MISSING VALUE ##, so
+                                  // you will see that something is missing.
 
 // Add a list
 
