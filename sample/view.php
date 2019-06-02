@@ -36,9 +36,9 @@ $listView = new ListView();         // Instead you may also use:
 // /*                               // which is just the same code packed in a static method
 foreach( $listData as $rowValues )
 {
-  $entryView = new View( 'list1_entry.html' );
-  $entryView->setValues( $rowValues );
-  
+  $entryView = new View( 'list1_entry.html' );  // You could add View::ESCAPE_ALL_VALUES here which is
+  $entryView->setValues( $rowValues );          // htmlspecialchars() for all added values, or do it
+                                                // yourself
   $listView->addView( $entryView );
 }
 // */
