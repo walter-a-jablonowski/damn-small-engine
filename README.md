@@ -28,9 +28,9 @@ composer require walter-a-jablonowski/damn-small-engine
 ## Sample
 
 ```php
-// Make a view, add values
-
-$view = new View( 'main.html' );
+// Make a view, add values        // You could add View::ESCAPE_ALL_VALUES here which is
+                                  // htmlspecialchars() for all added values, or do it
+$view = new View( 'main.html' );  // yourself
 
 $view->myVal = 'sample value';    // Just add what you need used PHP's magic method __set(), see there
 $view->myVal2 = ...               // Please set all values, use at least ''. If one is missing the class will
@@ -53,9 +53,9 @@ $listView = new ListView();         // Instead you may also use:
                                     // $listView = ListView::buildList( 'list1_entry.html', $listData );
 foreach( $listData as $rowValues )  // which is just the same code packed in a static method
 {
-  $entryView = new View( 'list1_entry.html' );  // You could add View::ESCAPE_ALL_VALUES here which is
-  $entryView->setValues( $rowValues );          // htmlspecialchars() for all added values, or do it
-                                                // yourself
+  $entryView = new View( 'list1_entry.html' );
+  $entryView->setValues( $rowValues );
+
   $listView->addView( $entryView );
 }
 
