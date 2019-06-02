@@ -14,7 +14,7 @@ USAGE:
 */
 class ListView extends ViewBase /*@*/
 {
-  protected $list;
+  protected $dseList;  // use unusual names, so cant be confused with generic attributes
 
 
   /*@ Builds a list class with View instances from given values */
@@ -42,7 +42,7 @@ class ListView extends ViewBase /*@*/
 
   public function addView( $view ) /*@*/
   {
-    $this->list[] = $view;
+    $this->dseList[] = $view;
   }
 
 
@@ -51,7 +51,7 @@ class ListView extends ViewBase /*@*/
   public function render( $addBr = true ) /*@*/
   {
     $s = '';
-    foreach( $this->list as $view )
+    foreach( $this->dseList as $view )
     {
       if( $s !== '' && $addBr)  $s .= "\n";
       $s .= $view->render();

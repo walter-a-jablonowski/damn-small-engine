@@ -1,6 +1,6 @@
 # Damn Small Engine
 
-**PHP low code templating system - simple but powerful**
+**PHP low code templating system - small but powerful**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -148,8 +148,10 @@ echo $view;
 
 ### list1_entry.html
 
+This is how you would use it if there is a blank in value name.
+
 ```php
-<tr><td><?= $this->values['field 1'] ?></td><td><?= $this->values['field 2'] ?></td></tr>
+<tr><td><?= $this->dseValues['field 1'] ?></td><td><?= $this->dseValues['field 2'] ?></td></tr>
 ```
 
 ### list2_entries.html

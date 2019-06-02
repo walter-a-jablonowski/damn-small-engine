@@ -1,7 +1,7 @@
 {
     "name": "walter-a-jablonowski/damn-small-engine",
-    "type": "library",
     "description": "PHP low code templating system",
+    "type": "library",
     "keywords": ["template" ,"templating"],
     "homepage": "https://github.com/walter-a-jablonowski/damn-small-engine",
     "license": "MIT",
@@ -16,8 +16,5 @@
 
     "require": {
         "php": ">=5.3"
-    },
-    "autoload": {
-        "psr-4": { "WAJ\\Lib\\Web\\DamnSmallEngine\\": "src/" }
     }
 }

@@ -16,9 +16,9 @@ class View extends ViewBase /*@*/
 {
   const ESCAPE_ALL_VALUES = true;
 
-  protected $scheme;
-  protected $values;
-  protected $escapeAllValues;
+  protected $dseScheme;  // use unusual names, so cant be confused with generic attributes
+  protected $dseValues;
+  protected $dseEscapeAllValues;
 
 
   /*@
@@ -34,8 +34,8 @@ class View extends ViewBase /*@*/
     if( ! file_exists( $scheme ))
       throw new \Exception('Damn Small Engine: html file missing');
   
-    $this->scheme = $scheme;
-    $this->escapeAllValues = $escapeAllValues;
+    $this->dseScheme = $scheme;
+    $this->dseEscapeAllValues = $escapeAllValues;
   }
 
 
@@ -49,21 +49,21 @@ class View extends ViewBase /*@*/
   */
   public function setValues( $values ) /*@*/
   {
-    if( $this->escapeAllValues )
+    if( $this->dseEscapeAllValues )
       foreach( $values as $name => $value )
-        $this->values[$name] = ViewBase::escapeEntities($value);
+        $this->dseValues[$name] = ViewBase::escapeEntities($value);
     else
-      $this->values = $values;
+      $this->dseValues = $values;
   }
 
   /*@ Set a value using `$myView->anyName = 'val';` see PHP magic methods */
   
   public function __set( $name, $value ) /*@*/
   {
-    if( $this->escapeAllValues )
-      $this->values[$name] = ViewBase::escapeEntities($value);
+    if( $this->dseEscapeAllValues )
+      $this->dseValues[$name] = ViewBase::escapeEntities($value);
     else
-      $this->values[$name] = $value;
+      $this->dseValues[$name] = $value;
   }
 
 
@@ -71,8 +71,8 @@ class View extends ViewBase /*@*/
   
   public function __get( $name )
   {
-    if( isset( $this->values[$name]))
-      return $this->values[$name];
+    if( isset( $this->dseValues[$name]))
+      return $this->dseValues[$name];
 
     return "## MISSING VALUE: $name ##";
   }
@@ -87,10 +87,10 @@ class View extends ViewBase /*@*/
   */
   protected function getValues( $key = null ) /*@*/
   {
-    if( $key && key_exists( $key, $this->values ))
-      return $this->values[$key];
+    if( $key && key_exists( $key, $this->dseValues ))
+      return $this->dseValues[$key];
     else
-      return $this->values;
+      return $this->dseValues;
   }
 
 
@@ -99,7 +99,7 @@ class View extends ViewBase /*@*/
   public function render() /*@*/
   {
     ob_start();
-    include( $this->scheme );
+    include( $this->dseScheme );
     return ob_get_clean();
   }
 
