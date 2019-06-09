@@ -25,6 +25,7 @@ composer require walter-a-jablonowski/damn-small-engine
   * just add your html block in a `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
 * All logic in code! Template files don't have any control structures (as it should be)
+  * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
 * You don't have 2 learn a new syntax => no problems fixing syntax bugs
 * Just use PHP's syntax that you know well, you can easily compose your view
 * And all PHP language features are available
