@@ -8,7 +8,7 @@ Visit my personal homepage: https://walter-a-jablonowski.github.io
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](Basic_sample.md)), although there are some more classes providing features: WebPage and Control (see samples below).
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](Basic_sample.md)), although there are more classes providing features: WebPage and Control (see samples below).
 
 If you like run the sample code in /sample_normal, /sample_advanced and /sample_basic.
 
@@ -22,7 +22,7 @@ composer require walter-a-jablonowski/damn-small-engine
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
-  * just add your html block in a `WebPage`, the rest will be done by this lib
+  * just add your html block @ `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
 * **All logic in code!** Template files don't have any control structures (as it should be)
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
@@ -30,13 +30,13 @@ composer require walter-a-jablonowski/damn-small-engine
   * just use PHP's syntax that you know well, you can easily compose your view
 * ... and **all PHP language features** are available
 
-**Can't get any updates?** ... for your prefered templating system anymore? Does it have missive codes, maintainance impossibile? No problem with Damn Small Engine. In comparrison this thing is so small, you can easily understand the code and maintain or extend it yourself.
+**Can't get any updates?** ... for your prefered templating system anymore? Does it have massive codes, maintainance impossibile? No problem with Damn Small Engine. This thing is so small, you can easily understand the code and maintain or extend it yourself.
 
 ## Normal sample
 
 **Building a page and bootstrap 4.3 table**
 
-:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
+:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional usage features. You can find a more **complex sample** below.
 
 * **Run the code:** /sample_normal/view.php
 * **HTML code see:** /sample_normal/my_controls and /sample_normal/my_includes
