@@ -18,7 +18,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* **Just 2 small classes** (can easily be changed), 2 additional classes providing features
+* **Just 2 small classes** (can easily be modified), 2 additional classes providing features
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
