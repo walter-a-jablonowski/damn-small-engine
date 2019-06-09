@@ -32,7 +32,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 **Building a page and bootstrap 4.3 table**
 
-There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
+:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
 
 * Run the code: /sample_normal
 * HTML code see: /sample_normal/my_controls and /sample_normal/my_includes
