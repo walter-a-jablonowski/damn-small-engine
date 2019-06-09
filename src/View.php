@@ -72,6 +72,8 @@ class View extends ViewBase /*@*/
   */
   public function setValues( $values ) /*@*/
   {
+    $this->dseValues = [];
+  
     if( $this->dseEscapeAllValues )
       foreach( $values as $name => $value )
         $this->dseValues[$name] = ViewBase::escapeEntities($value);

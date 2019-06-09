@@ -4,9 +4,10 @@
 
 ## Basic sample
 
-Minimal sample, showing some additional features. This only uses the classes **View** and **ListView**. For the advanced sample see [Readme](README.md)
+Minimal sample, also showing some additional features. This only uses the classes **View** and **ListView**. For the advanced samples see [Readme](README.md)
 
-Run the code: /sample_basic
+* Run the code: /sample_basic/view.php
+* HTML code see below or: /sample_basic/includes
 
 ```php
 // Demo data

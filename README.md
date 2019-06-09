@@ -18,17 +18,19 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* Minimal just 2 small classes (low code), additional classes providing features
-* Build nested html views and/or lists with data
-* Add styles/js in a `WebPage`
-* Automatically import component specific styles and js in a web page
+* Minimal **just 2 small classes** (can easily be changed), additional classes providing features
+* **Build nested views** and/or lists with data
+* **Add styles/js** in a `WebPage`
+* **Automatically import** component specific styles and js in a web page
   * just add your html block in a `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
-* All logic in code! Template files don't have any control structures (as it should be)
+* **All logic in code!** Template files don't have any control structures (as it should be)
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
-* You don't have 2 learn a new syntax => no problems fixing syntax bugs
-* Just use PHP's syntax that you know well, you can easily compose your view
-* And all PHP language features are available
+* You don't have 2 learn a new syntax => **no problems fixing syntax bugs**
+  * just use PHP's syntax that you know well, you can easily compose your view
+* And **all PHP language features** are available
+
+**Can't get any updates** for your prefered templating system anymore? Does it have missive codes, impossibile 2 maintain? No problem with Damn Small Engine. This thing is so small compared 2 popular systems, you could easily maintain it yourself.
 
 ## Normal sample
 
@@ -36,7 +38,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 :grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
 
-* Run the code: /sample_normal
+* Run the code: /sample_normal/view.php
 * HTML code see: /sample_normal/my_controls and /sample_normal/my_includes
 
 ```php
@@ -47,20 +49,6 @@ elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
 WebPage::setDirPrefix( 'my_' );
-
-
-// Data
-
-$dbRows = [                    // Demo data or load from db
-  'row 1' => [
-    'field 1' => 'entry 1.1',
-    'field 2' => 'entry 1.2'
-  ],
-  'row 2' => [
-    'field 1' => 'entry 2.1',
-    'field 2' => null
-  ]
-];
 
 
 // Build
@@ -100,7 +88,7 @@ echo $page->render();
 
 **Building a bootstrap 4.3 table dynamically** (for every database table)
 
-* Run the code: /sample_advanced
+* Run the code: /sample_advanced/view.php
 * HTML code see: /sample_advanced/my_controls and /sample_advanced/my_includes
 
 ```php
@@ -111,20 +99,6 @@ elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
 WebPage::setDirPrefix( 'my_' );
-
-
-// Data
-
-$dbRows = [                    // Demo data or load from db
-  'row 1' => [
-    'field 1' => 'entry 1.1',
-    'field 2' => 'entry 1.2'
-  ],
-  'row 2' => [
-    'field 1' => 'entry 2.1',
-    'field 2' => null
-  ]
-];
 
 
 // Build
