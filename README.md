@@ -2,13 +2,13 @@
 
 **PHP low code templating system - small but powerful**
 
-Visit my homepage: https://walter-a-jablonowski.github.io
+Visit my personal homepage: https://walter-a-jablonowski.github.io
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small class View and ListView files in /src. These are enough (shown in [Basic sample](Basic sample.md)), although there are some more classes providing features: WebPage and Control (see samples below).
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small class View and ListView files in /src. These are enough (shown in [Basic sample](Basic_sample.md)), although there are some more classes providing features: WebPage and Control (see samples below).
 
 If you like run the sample code in /sample_normal, /sample_advanced and /sample_basic.
 
@@ -30,7 +30,9 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Normal sample
 
-There is also a much [simpler sample](Basic sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
+**Building a page and bootstrap 4.3 table**
+
+There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
 
 * Run the code: /sample_normal
 * HTML code see: /sample_normal/my_controls and /sample_normal/my_includes
