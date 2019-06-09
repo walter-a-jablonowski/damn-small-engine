@@ -1,5 +1,8 @@
 <?php
 
+// Copyright (C) Walter A. Jablonowski 2019, MIT License
+// https://github.com/walter-a-jablonowski/damn-small-engine
+
 namespace WAJ\Lib\Web\DamnSmallEngine;
 
 
@@ -16,6 +19,7 @@ abstract class ViewBase /*@*/
 
   /*@ */
   abstract public function __toString(); /*@*/
+
 }
 
 ?>

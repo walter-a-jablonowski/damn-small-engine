@@ -1,5 +1,8 @@
 <?php
 
+// Copyright (C) Walter A. Jablonowski 2018, MIT License
+// https://github.com/walter-a-jablonowski/damn-small-engine
+
 namespace WAJ\Lib\Web\DamnSmallEngine;
 
 
@@ -16,7 +19,12 @@ class View extends ViewBase /*@*/
 {
   const ESCAPE_ALL_VALUES = true;
 
-  protected $dseScheme;  // use unusual names, so cant be confused with generic attributes
+  protected static $dirPrefix = '';  // can be part of name like ui_
+  protected static $viewFileEnding = 'html';
+
+  protected $dsePage;                // use unusual names, so cant be confused with generic attributes
+
+  protected $dseScheme;
   protected $dseValues;
   protected $dseEscapeAllValues;
 
@@ -32,10 +40,24 @@ class View extends ViewBase /*@*/
   public function __construct( $scheme, $escapeAllValues = false ) /*@*/
   {
     if( ! file_exists( $scheme ))
-      throw new \Exception('Damn Small Engine: html file missing');
+      throw new \Exception( "Damn Small Engine: html file missing $scheme" );
   
     $this->dseScheme = $scheme;
     $this->dseEscapeAllValues = $escapeAllValues;
+  }
+
+
+  /*@ */
+  public static function setDirPrefix( $s )      {  self::$dirPrefix = $s;  }
+  public static function setViewFileEnding( $s ) {  self::$viewFileEnding = $s;  } /*@*/
+
+
+  /*@
+
+  */
+  public function setPage( $page ) /*@*/
+  {
+    $this->dsePage = $page;
   }
 
 
@@ -44,6 +66,7 @@ class View extends ViewBase /*@*/
   Replace all values
 
   TASKS:
+    
     - escapeAllValues recursive
   
   */
@@ -56,8 +79,11 @@ class View extends ViewBase /*@*/
       $this->dseValues = $values;
   }
 
-  /*@ Set a value using `$myView->anyName = 'val';` see PHP magic methods */
+  /*@
   
+  Set a value using `$myView->anyName = 'val';` see PHP magic methods
+  
+  */
   public function __set( $name, $value ) /*@*/
   {
     if( $this->dseEscapeAllValues )
@@ -67,14 +93,18 @@ class View extends ViewBase /*@*/
   }
 
 
-  /*@ Get a value using `$val = $myView->anyName;` see PHP magic methods */
+  /*@
   
+  Get a value using `$val = $myView->anyName;` see PHP magic methods
+    
+  */
   public function __get( $name )
   {
     if( isset( $this->dseValues[$name]))
       return $this->dseValues[$name];
 
-    return "## MISSING VALUE: $name ##";
+    // return "## MISSING VALUE: $name ##";
+    return '';
   }
 
   /*@
@@ -94,26 +124,37 @@ class View extends ViewBase /*@*/
   }
 
 
-  /*@ Render view as string */
-
+  /*@
+  
+  Render view as string
+  
+  */
   public function render() /*@*/
   {
+    // TASK: maybe add a func that ensures all values are set, at least ''
+
     ob_start();
     include( $this->dseScheme );
     return ob_get_clean();
   }
 
-  /*@ Use in strings */
+  /*@
+  
+    Use in strings
 
+  */
   public function __toString() /*@*/
   {
     return $this->render();
   }
 
 
-  /*@ Escape helper */
-
-  public static function escapeEntities( $s ) /*@*/ // DEV
+  /*@
+  
+  Escape helper
+  
+  */
+  public static function escape( $s ) /*@*/ // DEV
   {
     return htmlspecialchars( $s );
   }

@@ -1,5 +1,8 @@
 <?php
 
+// Copyright (C) Walter A. Jablonowski 2018, MIT License
+// https://github.com/walter-a-jablonowski/damn-small-engine
+
 namespace WAJ\Lib\Web\DamnSmallEngine;
 
 
@@ -22,7 +25,7 @@ class ListView extends ViewBase /*@*/
   public static function buildList( $scheme, $values, $escapeAllValues = false ) /*@*/
   {
     if( ! file_exists( $scheme ))
-      throw new \Exception('Damn Small Engine: html file missing');
+      throw new \Exception( "Damn Small Engine: html file missing $scheme" );
 
     $listView = new ListView();
 
@@ -38,16 +41,22 @@ class ListView extends ViewBase /*@*/
   }
 
 
-  /*@ Add an object of View class */
-
+  /*@
+  
+  Add an object of View class
+  
+  */
   public function addView( $view ) /*@*/
   {
     $this->dseList[] = $view;
   }
 
 
-  /*@ Render all view in $list */
-
+  /*@
+  
+  Render all view in $list
+  
+  */
   public function render( $addBr = true ) /*@*/
   {
     $s = '';
@@ -60,8 +69,11 @@ class ListView extends ViewBase /*@*/
     return $s;
   }
 
-  /*@ Use in strings */
-
+  /*@
+  
+  Use in strings
+  
+  */
   public function __toString() /*@*/
   {
     return $this->render();

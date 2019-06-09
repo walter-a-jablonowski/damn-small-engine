@@ -2,13 +2,15 @@
 
 **PHP low code templating system - small but powerful**
 
+Visit my homepage: https://walter-a-jablonowski.github.io
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This was tested using PHP 7.1.9, it should work from 5.3 and above.
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small class files in /src.
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small class View and ListView files in /src. These are enough (shown in [Basic sample](Basic sample.md)), although there are some more classes providing features: WebPage and Control (see samples below).
 
-If you like run the sample code in /sample, which is the same as below.
+If you like run the sample code in /sample_normal, /sample_advanced and /sample_basic.
 
 ```
 composer require walter-a-jablonowski/damn-small-engine
@@ -16,169 +18,173 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* Just 2 small classes, low code
-* Build nested html views with data using `$view->subView = $subView;`
-* You can also include lists of views using
-  * either ListView class (prefered)
-  * or as shown in sample "list alternative version" below
-* You can build a tree of nested html views (sub view can have sub views ...)
-* You can include a list in a list and build list hierarchies
-* All nested views are processed at once
+* Minimal just 2 small classes, low code
+* Build nested html views and/or lists with data
+* You can automatically import component specific styles and js in a web page -
+  just add your html in a view, the rest will be done by this lib
+* This lib is like `$view->subView = new ListView( ... )` (or variations of it)
+* All logic is in code - Template files don't have any control structures (as it should be)
+* You don't have 2 learn a new syntax => You won't have problems with figuring out how 2 write it correctly
+* Just use PHP's syntax that you know well, you can easily compose your view
+* And all PHP language features are available
 
-## Sample
+## Normal sample
+
+There is also a much [simpler sample](Basic sample.md), that used only the most basic 2 classes and also has some additional features. You can find a more **complex sample** below.
+
+* Run the code: /sample_normal
+* HTML code see: /sample_normal/my_controls and /sample_normal/my_includes
 
 ```php
-// Make a view, add values        // You could add View( ..., View::ESCAPE_ALL_VALUES ) which
-                                  // is htmlspecialchars() for all added values, or do it yourself
-$view = new View( 'main.html' );  
-$view->myVal = 'sample value';    // Just add what you need. Add all values, use at least ''. If one from
-// $view->myVal2 = ...            // html below is missing, the class will print ## MISSING VALUE ##, so
-                                  // you can see it in UI.
+// Some config
 
-// Add a list
+if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  WebPage::preferMinified( true );
 
-$listData = [                     // Demo data or load from db
+// Control::setControlsFolder('controls/');
+WebPage::setDirPrefix( 'my_' );
+
+
+// Data
+
+$dbRows = [                    // Demo data or load from db
   'row 1' => [
     'field 1' => 'entry 1.1',
     'field 2' => 'entry 1.2'
   ],
   'row 2' => [
     'field 1' => 'entry 2.1',
-    'field 2' => 'entry 2.2'
+    'field 2' => null
   ]
 ];
 
 
-// Version 1
+// Build
 
-$listView = ListView::buildList( 'list1_entry.html', $listData );
-$view->list0 = $listView;
+$page = new WebPage( 'includes/page' );
+$layout = $page->newView( 'includes/layout' );
 
+// Page data
 
-// Version 2
+$layout->myValue  = 'myString';
+$layout->myValue2 = 'myString 2';
 
-$listView = new ListView();         // The sample above is just this code packed in a static method
-                                    // you might want use this version if you need 2 make something special
-foreach( $listData as $rowValues )
+// Table
+
+$table = $page->newControl( 'controls/table/view' );
+$rows = $page->newListView();
+
+foreach( $dbRows as $id => $dbRow )
 {
-  $entryView = new View( 'list1_entry.html' );
-  $entryView->setValues( $rowValues );
+  $row = $page->newView( 'controls/table/row' );
 
-  $listView->addView( $entryView );
-}
-
-$view->list1 = $listView;
-
-
-// Alternative version
-
-$list2 = new View( 'list2_entries.html' );
-$list2->setValues( $listData );
-$view->list2 = $list2;
-
-
-// You could also add: views - in a list - in a view - in a list
-
-$outerList = new ListView();
-
-for( $i=0; $i < 2; $i++ )
-{
-  $entryView = new View( 'table.html' );
-  $innerList = ListView::buildList( 'list1_entry.html', $listData );
-  $entryView->list = $innerList;
+  $row->field1 = $dbRow['field 1'];
+  $row->field2 = $dbRow['field 2'];
   
-  $outerList->addView( $entryView );
+  $rows->addView( $row );
 }
 
-$view->listInList = $outerList;
+$table->content = $rows;
+$layout->table = $table;
+$page->attachContent( $layout );
 
 
-// Build all
-
-echo $view;
+echo $page->render();
 ```
 
-### main.html
+## Advanced sample
+
+**Building a bootstrap 4.3 table dynamically** (for every database table)
+
+* Run the code: /sample_advanced
+* HTML code see: /sample_advanced/my_controls and /sample_advanced/my_includes
 
 ```php
-<html>
-  <head></head>
-  <body>
+// Some config
 
-    I am a <?= $this->myVal ?>.
+if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  WebPage::preferMinified( true );
+
+// Control::setControlsFolder('controls/');
+WebPage::setDirPrefix( 'my_' );
 
 
-    <!-- List 0 -->
+// Data
 
-    <h3>List</h3>
+$dbRows = [                    // Demo data or load from db
+  'row 1' => [
+    'field 1' => 'entry 1.1',
+    'field 2' => 'entry 1.2'
+  ],
+  'row 2' => [
+    'field 1' => 'entry 2.1',
+    'field 2' => null
+  ]
+];
 
-    <table>
-      <?= $this->list0 ?>
-    </table>
 
+// Build
+
+$page  = new WebPage( 'includes/page' );
+$layout = $page->newView( 'includes/layout' );
+$table = $page->newControl( 'controls/table/view' );
+
+$this->tableClasses   = '';  // no additional classes
+$this->headClasses    = '';
+$this->headRowClasses = '';
+$this->bodyClasses    = '';
+
+// Table header
+
+$headCells = $page->newListView();
+
+foreach( $dbRows[0] as $name => $value )
+{
+  $headCell = $page->newView( 'controls/table/head_cell' );
+  $headCell->content = $value;
+  $headCells->addView( $headCell );
+}
+
+$table->headContent = $headCells;
+
+// Table lines
+
+$rows = $page->newListView();
+
+foreach( $dbRows as $id => $dbRow )
+{
+  $row = $page->newView( 'controls/table/row' );
+  $cells = $page->newListView();
+  
+  // Table cells
+
+  $i = 0;
+  foreach( $dbRow as $name => $value )
+  {
+    $i++;
+
+    if( $i == 1 )
+      $cell = $page->newView( 'controls/table/first_cell' );  // first cell differs, see https://getbootstrap.com/docs/4.3/content/tables
+    else
+      $cell = $page->newView( 'controls/table/cell' );
+
+    $cell->content = $value;
+    $cells->addView( $cell );
+  }
     
-    <!-- List 1 -->
-    
-    <h3>List 1</h3>
+  $row->content = $cells;
+  $rows->addView( $row );
+}
 
-    <table>
-      <?= $this->list1 ?>
-    </table>
-    
-    
-    <!-- List 2 -->
-    
-    <h3>List 2</h3>
+$table->bodyContent = $rows;
 
-    <?= $this->list2 ?>
+$layout->content = $table;
+$page->attachContent( $layout );
 
 
-    <!-- List in list -->
-    
-    <h3>List in list</h3>
-
-    <table>
-      <?= $this->listInList ?>
-    </table>
-    
-    
-  </body>
-</html>
+echo $page->render();
 ```
-
-### list1_entry.html
-
-This is how you would use it if there is a blank in value name.
-
-```php
-<tr><td><?= $this->dseValues['field 1'] ?></td><td><?= $this->dseValues['field 2'] ?></td></tr>
-```
-
-### list2_entries.html
-
-```php
-<table>
-
-<?php foreach( $this->getValues() as $rowValues ): ?>
-
-  <tr><td><?= $rowValues['field 1'] ?></td><td><?= $rowValues['field 2'] ?></td></tr>
-
-<?php endforeach; ?>
-
-</table>
-```
-
-### table.html
-
-```php
-<table>
-
-  <?= $this->list ?>
-
-</table>
-```
-
 
 ## LICENSE
 
-Copyright (C) Walter A. Jablonowski 2018, MIT [License](LICENSE)
+Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
