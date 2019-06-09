@@ -18,10 +18,11 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* Minimal just 2 small classes, low code
+* Minimal just 2 small classes (low code), additional classes providing features
 * Build nested html views and/or lists with data
+* Add styles/js in a `WebPage`
 * Automatically import component specific styles and js in a web page
-  * just add your html in a `WebPage`, the rest will be done by this lib
+  * just add your html block in a `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
 * All logic in code! Template files don't have any control structures (as it should be)
 * You don't have 2 learn a new syntax => no problems fixing syntax bugs
