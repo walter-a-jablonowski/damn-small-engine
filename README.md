@@ -22,7 +22,7 @@ composer require walter-a-jablonowski/damn-small-engine
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
-  * just add your html block @ `WebPage`, the rest will be done by this lib
+  * just add your html block in `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
 * **All logic in code!** Template files don't have any control structures (as it should be)
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
