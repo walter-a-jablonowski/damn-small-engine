@@ -18,7 +18,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* Minimal **just 2 small classes** (can easily be changed), additional classes providing features
+* **Just 2 small classes** (can easily be changed), additional classes providing features
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
@@ -28,7 +28,7 @@ composer require walter-a-jablonowski/damn-small-engine
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
 * You don't have 2 learn a new syntax => **no problems fixing syntax bugs**
   * just use PHP's syntax that you know well, you can easily compose your view
-* And **all PHP language features** are available
+* ... and **all PHP language features** are available
 
 **Can't get any updates** for your prefered templating system anymore? Does it have missive codes, impossibile 2 maintain? No problem with Damn Small Engine. This thing is so small compared 2 popular systems, you could easily maintain it yourself.
 
