@@ -30,7 +30,7 @@ composer require walter-a-jablonowski/damn-small-engine
   * just use PHP's syntax that you know well, you can easily compose your view
 * ... and **all PHP language features** are available
 
-**Can't get any updates** for your prefered templating system anymore? Does it have missive codes, impossibile 2 maintain? No problem with Damn Small Engine. This thing is so small compared 2 popular systems, you could easily maintain it yourself.
+**Can't get any updates** for your prefered templating system anymore? Does it have missive codes, maintainance impossibile? No problem with Damn Small Engine. In comparrison this thing is so small, you could easily maintain it yourself.
 
 ## Normal sample
 
