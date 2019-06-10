@@ -55,17 +55,18 @@ $page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
 
-// Add some style (the same for js use
+// Add some style dynamically (or do in html)
 
 $page->addStyleInclude( 'includes/styles/style.css' );
-$page->addStyle( 'font-size; 15px;' ); // => page head <style></style>
+$page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
 
 // the same for js use: addJSInclude() addJS()
 
 
-// Add some classes 2 h1
+// Add some classes dynamically
 
-$layout->h1Classes = "some classes";  // see my_includes/layout.html, use View's printClasses() or addClasses()
+$layout->h1Classes = "some classes";
+// see my_includes/layout.html, use View's printClasses() or addClasses()
 
 
 // Component
@@ -74,12 +75,15 @@ $layout->h1Classes = "some classes";  // see my_includes/layout.html, use View's
 
 $comp = $page->newComponent( 'components/demo_comp' );
 //
-// this will also include  my_components/demo_comp/style.css => page head <style></style>
-//                    and  my_components/demo_comp/code.js   => page <script></script>
-//                    and  my_components/demo_comp/style_includes/dummy.css
-//                    and  my_components/demo_comp/js_includes/dummy.js
+// this will also include
 //
-// have a look at my_includes/layout.html 2 see where
+//        my_components/demo_comp/style.css  =>  page head <style></style>
+//   and  my_components/demo_comp/code.js    =>  page <script></script>
+//   and  my_components/demo_comp/style_includes/dummy.css
+//   and  my_components/demo_comp/style_includes/dummy2.css
+//   and  my_components/demo_comp/js_includes/dummy.js
+//
+// have a look at my_includes/layout.html and see where
 
 $comp->content  = 'I am a component';
 $layout->myComponent = $comp;

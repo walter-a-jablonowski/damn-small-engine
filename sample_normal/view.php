@@ -57,7 +57,8 @@ $layout->myValue2 = 'myString 2';
 // Table
 
 $table = $page->newControl( 'controls/table/view' );
-$rows = $page->newListView();
+$rows = $page->newListView();  // instead you may use ListView::buildList( ... );
+                               // see basic sample
 
 foreach( $dbRows as $id => $dbRow )
 {

@@ -59,8 +59,8 @@ $view->list2 = $listView;
 
 // Alternative version
 
-$list2 = new View( 'includes/list2_entries' );
-$list2->setValues( $listData );
+$list5 = new View( 'includes/list2_entries' );
+$list5->setValues( $listData );
 $view->list5 = $list5;
 
 

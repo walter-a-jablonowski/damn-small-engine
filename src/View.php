@@ -19,8 +19,8 @@ class View extends ViewBase /*@*/
 {
   const ESCAPE_ALL_VALUES = true;
 
-  protected static $dirPrefix = '';  // can be part of name like ui_
-  protected static $viewFileEnding = 'html';
+  public static $dirPrefix = '';  // can be part of name like ui_
+  public static $viewFileEnding = 'html';
 
   protected $dseScheme;              // use unusual names, so cant be confused with generic attributes
   protected $dseValues;
@@ -40,7 +40,7 @@ class View extends ViewBase /*@*/
     $s = self::$dirPrefix . "$scheme." . self::$viewFileEnding;
 
     if( ! file_exists( $s ))
-      throw new \Exception( "Damn Small Engine: html file missing $scheme" );
+      throw new \Exception( "Damn Small Engine: html file missing $s" );
   
     $this->dseScheme = $scheme;
     $this->dseEscapeAllValues = $escapeAllValues;
@@ -116,7 +116,7 @@ class View extends ViewBase /*@*/
   Get all or a portion of values, defined by a key, use in html
 
   ARGS:
-  
+
     $key: if given and exists in values only this part of values will be returned, else all values
 
   */

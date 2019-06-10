@@ -44,6 +44,7 @@ $view->list1 = $listView;
 
 $listView = new ListView();         // The sample above is just this code packed in a static method
                                     // you might want use this version if you need 2 make something special
+// /*
 foreach( $listData as $rowValues )
 {
   $entryView = new View( 'includes/list1_entry' );
@@ -51,6 +52,7 @@ foreach( $listData as $rowValues )
 
   $listView->addView( $entryView );
 }
+// */
 
 $view->list2 = $listView;
 
