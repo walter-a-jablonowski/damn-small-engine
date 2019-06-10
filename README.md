@@ -58,8 +58,8 @@ $dbRows = ...
 
 // Build
 
-$page = new WebPage( 'includes/page' );
-$layout = $page->newView( 'includes/layout' );
+$page = new WebPage( 'includes/page' );         // looks like hierachical identifier, is also: a file path
+$layout = $page->newView( 'includes/layout' );  //   prefix and type will be added => my_includes/page.html
 
 // Page data
 
