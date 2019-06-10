@@ -36,7 +36,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 **Building a page and bootstrap 4.3 table**
 
-:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional usage features. You can find a more **complex sample** below.
+:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional usage features. You can find a more **complex sample** below. See API for more info **(currently missing)**.
 
 * **Run the code:** /sample_normal/view.php
 * **HTML code see:** /sample_normal/my_controls and /sample_normal/my_includes
@@ -58,6 +58,7 @@ $dbRows = ...
 
 // Build
 
+
 $page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
@@ -66,7 +67,7 @@ $layout = $page->newView( 'includes/layout' );
 $layout->myValue  = 'myString';
 $layout->myValue2 = 'myString 2';
 
-// Table
+// Table (dynamically)
 
 $table = $page->newControl( 'controls/table/view' );
 $rows = $page->newListView();
@@ -114,6 +115,7 @@ $dbRows = ...
 
 
 // Build
+
 
 $page  = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );

@@ -51,6 +51,7 @@ $dbRows = [                    // Demo data or load from db
 
 // Build
 
+
 $page  = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
@@ -80,7 +81,7 @@ $comp->myValue  = 'I am a component';
 $layout->component = $comp;  
 
 
-// Table
+// Table (dynamically)
 
 $table = $page->newControl( 'controls/table/view' );
 
