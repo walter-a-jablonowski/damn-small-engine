@@ -202,7 +202,10 @@ class WebPage extends View /*@*/
       
       foreach( $f as $name)
       {
-        if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+        $a = pathinfo( $name );  $e = $a['extension'];
+        
+        // if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+        if( $e == 'js' && strpos( $name, '.min') === false) // && is_readable($full))
           $this->addStyleInclude( $styleIncSrc . '/' . $name );  // TASK: improve
       }
 
@@ -218,10 +221,13 @@ class WebPage extends View /*@*/
     if( is_dir( $jsIncSrc ))  // DEV
     {
       $f = scandir( $jsIncSrc );
-      
+
       foreach( $f as $name)
       {
-        if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+        $a = pathinfo( $name );  $e = $a['extension'];
+        
+        // if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+        if( $e == 'css' && strpos( $name, '.min') === false) // && is_readable($full))
           $this->addStyleInclude( $jsIncSrc . '/' . $name );  // TASK: improve
       }
     }
@@ -250,7 +256,7 @@ class WebPage extends View /*@*/
   /*@ */
   public function render() /*@*/
   {
-    // TASK: ensure needed anchoes are there for styl and js
+    // TASK: ensure needed anchoes are there for style and js
 
     $this->dseStyleInc  = array_unique( $this->dseStyleInc );
     $this->dsePageStyle = array_unique( $this->dsePageStyle );

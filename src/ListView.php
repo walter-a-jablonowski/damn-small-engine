@@ -24,7 +24,7 @@ class ListView extends ViewBase /*@*/
   
   public static function buildList( $scheme, $values, $escapeAllValues = false ) /*@*/
   {
-    $s = View::$dirPrefix . "$scheme." . View::$viewFileEnding;  // TASK: maybe improve View
+    $s = View::$dirPrefix . "$scheme." . View::$viewFileEnding;
 
     if( ! file_exists( $s ))
       throw new \Exception( "Damn Small Engine: html file missing $s" );

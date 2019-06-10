@@ -19,8 +19,6 @@ USAGE:
 
   see readme
 
-TASKS:
-
 */
 class Control extends View /*@*/
 {
