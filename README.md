@@ -51,6 +51,11 @@ elseif( $env == PROD )  WebPage::preferMinified( true );
 WebPage::setDirPrefix( 'my_' );
 
 
+// Data
+
+$dbRows = ...
+
+
 // Build
 
 $page = new WebPage( 'includes/page' );
@@ -99,6 +104,11 @@ elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
 WebPage::setDirPrefix( 'my_' );
+
+
+// Data
+
+$dbRows = ...
 
 
 // Build
