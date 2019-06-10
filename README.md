@@ -75,7 +75,7 @@ foreach( $dbRows as $id => $dbRow )
 {
   $row = $page->newView( 'controls/table/row' );
 
-  $row->field1 = $dbRow['field 1'];
+  $row->field1 = $dbRow['field 1'];  // you could also use: $row->setValues( $dbRow );
   $row->field2 = $dbRow['field 2'];
   
   $rows->addView( $row );
@@ -92,6 +92,8 @@ echo $page->render();
 ## Advanced sample
 
 **Building a bootstrap 4.3 table dynamically** (for every database table)
+
+This sample also adds style 2 page, and uses a "component", a html block that needs special style and js files. These will be automatically included. See API for more info **(currently missing)**.
 
 * **Run the code:** /sample_advanced/view.php
 * **HTML code see:** /sample_advanced/my_controls and /sample_advanced/my_includes
@@ -115,6 +117,35 @@ $dbRows = ...
 
 $page  = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
+
+
+// Add some style (the same for js use
+
+$page->addStyleInclude( 'includes/styles/style.css' );
+$page->addStyle( 'font-size; 15px;' ); // => page head <style></style>
+
+// the same for js use: addJSInclude() addJS()
+
+
+// Component
+
+// just add your view, the lib will add needed style and js for the component
+
+$comp = $page->newComponent( 'components/demo_comp' );
+//
+// this will also include  my_components/demo_comp/style.css => page head <style></style>
+//                    and  my_components/demo_comp/code.js   => page <script></script>
+//                    and  my_components/demo_comp/style_includes/dummy.css
+//                    and  my_components/demo_comp/js_includes/dummy.js
+//
+// have a look at my_includes/layout.html 2 see where
+
+$comp->myValue  = 'I am a component';
+$layout->component = $comp;  
+
+
+// Table
+
 $table = $page->newControl( 'controls/table/view' );
 
 $this->tableClasses   = '';  // no additional classes

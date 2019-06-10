@@ -19,7 +19,7 @@ define('DEBUG', 'DEBUG');
 $env = DEBUG;
 
 
-// Building a bootstrap 4.3 table, see https://getbootstrap.com/docs/4.3/content/tables
+// Building a page and bootstrap 4.3 table
 
 // Some config
 
@@ -63,7 +63,7 @@ foreach( $dbRows as $id => $dbRow )
 {
   $row = $page->newView( 'controls/table/row' );
 
-  $row->field1 = $dbRow['field 1'];
+  $row->field1 = $dbRow['field 1'];  // you could also use: $row->setValues( $dbRow );
   $row->field2 = $dbRow['field 2'];
   
   $rows->addView( $row );
@@ -73,8 +73,6 @@ $table->content = $rows;
 $layout->table = $table;
 $page->attachContent( $layout );
 
-
-// !d( $page );
 
 echo $page->render();
 

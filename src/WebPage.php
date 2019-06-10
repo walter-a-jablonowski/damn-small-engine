@@ -90,6 +90,8 @@ class WebPage extends View /*@*/
     if( self::$dseUseMin && file_exists( $s))
       $styleInc = $s;
 
+    $styleInc = self::$dirPrefix . $this->scheme;
+
     $this->dseStyleInc[] = '<link href="' . $styleInc . '" rel="stylesheet">';
   }
 
@@ -107,6 +109,8 @@ class WebPage extends View /*@*/
     $s = str_replace( '.js', '.min.js', $jsInc); // TASK: improve
     if( self::$dseUseMin && file_exists( $s))
       $jsInc = $s;
+
+    $jsInc = self::$dirPrefix . $this->scheme;
 
     $this->dseStyleInc[] = '<script src="' . $jsInc . '"></script>';
   }
@@ -183,11 +187,11 @@ class WebPage extends View /*@*/
   public function newComponent( $scheme, $escapeAllValues = false ) /*@*/
   {
 
-    $styleIncSrc = self::$dirPrefix . self::$componentsFolder . "$scheme/inc_styles";
-    $styleSrc    = self::$dirPrefix . self::$componentsFolder . "$scheme/style.css";
-    $viewFile    = self::$dirPrefix . self::$componentsFolder . "$scheme/view." . self::$viewFileEnding;
-    $jsIncSrc    = self::$dirPrefix . self::$componentsFolder . "$scheme/inc_js";
-    $jsSrc       = self::$dirPrefix . self::$componentsFolder . "$scheme/code.js";
+    $styleIncSrc = self::$componentsFolder . "$scheme/style_includes";
+    $styleSrc    = self::$componentsFolder . "$scheme/style.css";
+    $viewFile    = self::$componentsFolder . "$scheme/view";
+    $jsIncSrc    = self::$componentsFolder . "$scheme/js_includes";
+    $jsSrc       = self::$componentsFolder . "$scheme/code.js";
 
     
     // Inc styles
