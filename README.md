@@ -92,7 +92,7 @@ echo $page->render();
 
 ## Advanced sample
 
-**Building a bootstrap 4.3 table dynamically** (for every database table)
+**... and building a bootstrap 4.3 table dynamically** (for every database table)
 
 **still debugging this one**
 

@@ -21,7 +21,7 @@ define('DEBUG', 'DEBUG');
 $env = DEBUG;
 
 
-// Building a bootstrap 4.3 table dynamically (for every database table)
+// Advanced sample and Building a bootstrap 4.3 table dynamically (for every database table)
 
 // This sample also adds style 2 page, and uses a "component", a html block that needs special style and js files. These will be automatically included. See API for more info **(currently missing)**.
 
