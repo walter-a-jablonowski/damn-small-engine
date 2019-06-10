@@ -1,6 +1,6 @@
 <?php
 
-// http://localhost/50-dev-lib-cmn/web/src/php_lib_web/damn-small-engine/sample_advanced/view.php
+// http://localhost/50-dev-lib-cmn/web/src/php_lib_web/damn-small-engine/sample_normal/view.php
 
 use WAJ\Lib\Web\DamnSmallEngine\View;
 use WAJ\Lib\Web\DamnSmallEngine\ListView;
@@ -73,6 +73,8 @@ $table->content = $rows;
 $layout->table = $table;
 $page->attachContent( $layout );
 
+
+// !d( $page );
 
 echo $page->render();
 

@@ -37,22 +37,53 @@ class Control extends View /*@*/
   */
   public function __construct( $scheme, $escapeAllValues = false ) /*@*/
   {
-    $s = $this->dirPrefix . self::$controlsFolder . $scheme . '.' . $this->viewFileEnding;
-    
-    // $s = $this->dirPrefix . self::$controlsFolder . $scheme;
+    // $s = self::$dirPrefix . self::$controlsFolder . $this->scheme . '.' . self::$viewFileEnding;
+
+
+    // $s = self::$dirPrefix . self::$controlsFolder . $this->scheme;
     
     // if( is_dir( $s ))  // TASK
-    //   $s .= '/view.' . $this->viewFileEnding;
+    //   $s .= '/view.' . self::$viewFileEnding;
     // else
-    //   $s .= '.' . $this->viewFileEnding;
+    //   $s .= '.' . self::$viewFileEnding;
 
-    parent::__construct( $s, $escapeAllValues );
+    parent::__construct( $scheme, $escapeAllValues );
   }
 
 
   /*@  */
   public static function setControlsFolder( $s ) {  self::$controls = $s;  } /*@*/
 
+
+  /*@
+  
+  Render view
+
+  TASKS:
+
+    - improve, is doubl impl
+  
+  */
+  public function render() /*@*/
+  {
+    // TASK: maybe add a func that ensures all values are set, at least ''
+
+    $s = self::$dirPrefix . self::$controlsFolder . $this->dseScheme . '.' . self::$viewFileEnding;
+
+    ob_start();
+    include( $s );
+    return ob_get_clean();
+  }
+
+  /*@
+  
+  For use in strings
+
+  */
+  public function __toString() /*@*/
+  {
+    return $this->render();
+  }
 }
 
 ?>

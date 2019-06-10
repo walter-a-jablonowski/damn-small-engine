@@ -22,9 +22,7 @@ class View extends ViewBase /*@*/
   protected static $dirPrefix = '';  // can be part of name like ui_
   protected static $viewFileEnding = 'html';
 
-  protected $dsePage;                // use unusual names, so cant be confused with generic attributes
-
-  protected $dseScheme;
+  protected $dseScheme;              // use unusual names, so cant be confused with generic attributes
   protected $dseValues;
   protected $dseEscapeAllValues;
 
@@ -39,7 +37,9 @@ class View extends ViewBase /*@*/
   */
   public function __construct( $scheme, $escapeAllValues = false ) /*@*/
   {
-    if( ! file_exists( $scheme ))
+    $s = self::$dirPrefix . "$scheme." . self::$viewFileEnding;
+
+    if( ! file_exists( $s ))
       throw new \Exception( "Damn Small Engine: html file missing $scheme" );
   
     $this->dseScheme = $scheme;
@@ -47,18 +47,20 @@ class View extends ViewBase /*@*/
   }
 
 
-  /*@ */
-  public static function setDirPrefix( $s )      {  self::$dirPrefix = $s;  }
-  public static function setViewFileEnding( $s ) {  self::$viewFileEnding = $s;  } /*@*/
-
-
   /*@
 
+  DESC:
+  
+    Change
+
+    - a prefix that will be prepend each path
+    - the file ending that will be attached each path
+
+    when making a new view using any of the classes in this lib
+
   */
-  public function setPage( $page ) /*@*/
-  {
-    $this->dsePage = $page;
-  }
+  public static function setDirPrefix( $s )      {  self::$dirPrefix = $s;  }
+  public static function setViewFileEnding( $s ) {  self::$viewFileEnding = $s;  } /*@*/
 
 
   /*@
@@ -76,7 +78,7 @@ class View extends ViewBase /*@*/
   
     if( $this->dseEscapeAllValues )
       foreach( $values as $name => $value )
-        $this->dseValues[$name] = ViewBase::escapeEntities($value);
+        $this->dseValues[$name] = ViewBase::escape($value);
     else
       $this->dseValues = $values;
   }
@@ -89,7 +91,7 @@ class View extends ViewBase /*@*/
   public function __set( $name, $value ) /*@*/
   {
     if( $this->dseEscapeAllValues )
-      $this->dseValues[$name] = ViewBase::escapeEntities($value);
+      $this->dseValues[$name] = ViewBase::escape($value);
     else
       $this->dseValues[$name] = $value;
   }
@@ -111,7 +113,7 @@ class View extends ViewBase /*@*/
 
   /*@
 
-  Get all or a portion of values, defined by a key
+  Get all or a portion of values, defined by a key, use in html
 
   ARGS:
     $key: if given and exists in values only this part of values will be returned, else all values
@@ -128,21 +130,23 @@ class View extends ViewBase /*@*/
 
   /*@
   
-  Render view as string
+  Render view
   
   */
   public function render() /*@*/
   {
     // TASK: maybe add a func that ensures all values are set, at least ''
 
+    $s = self::$dirPrefix . $this->dseScheme . '.' . self::$viewFileEnding;
+
     ob_start();
-    include( $this->dseScheme );
+    include( $s );
     return ob_get_clean();
   }
 
   /*@
   
-    Use in strings
+  For use in strings
 
   */
   public function __toString() /*@*/
@@ -156,7 +160,7 @@ class View extends ViewBase /*@*/
   Escape helper
   
   */
-  public static function escape( $s ) /*@*/ // DEV
+  public static function escape( $s ) /*@*/
   {
     return htmlspecialchars( $s );
   }

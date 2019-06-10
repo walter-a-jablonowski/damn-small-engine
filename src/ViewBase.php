@@ -14,6 +14,19 @@ Base class for a view
 abstract class ViewBase /*@*/
 {
 
+  protected $dseController;  // use unusual names, so cant be confused with generic attributes
+
+  /*@
+
+  used internally
+
+  */
+  public function setController( $controller ) /*@*/
+  {
+    $this->dseController = $controller;
+  }
+
+
   /*@ */
   abstract public function render(); /*@*/
 

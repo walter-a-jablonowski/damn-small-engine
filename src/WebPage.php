@@ -5,6 +5,8 @@
 
 namespace WAJ\Lib\Web\DamnSmallEngine;
 
+require 'kint.phar';
+
 
 /*@
 
@@ -42,10 +44,10 @@ class WebPage extends View /*@*/
   
   protected $dseAllView;  // Just for fun, seems no need (see class comment), but the code seems nicer
 
-  protected $dseStyleInc;
-  protected $dsePageStyle;
-  protected $dseJSInc;
-  protected $dsePageJS;
+  protected $dseStyleInc = [];
+  protected $dsePageStyle = [];
+  protected $dseJSInc = [];
+  protected $dsePageJS = [];
 
 
   /*@
@@ -60,7 +62,7 @@ class WebPage extends View /*@*/
   {
     parent::__construct( $scheme, false );
 
-    $this->styleIncludes = [];
+    $this->styleIncludes = [];  // this is in html
     $this->pageStyle     = [];
     $this->JSIncludes    = [];
     $this->pageJS        = [];
@@ -74,9 +76,9 @@ class WebPage extends View /*@*/
 
 
   /*@ */
-  public static function preferMinified( $useMin ) /*@*/
+  public static function preferMinified( $dseUseMin ) /*@*/
   {
-    self::$useMin = $useMin;
+    self::$dseUseMin = $dseUseMin;
   }
 
 
@@ -85,7 +87,7 @@ class WebPage extends View /*@*/
   public function addStyleInclude( $styleInc ) /*@*/
   {
     $s = str_replace( '.css', '.min.css', $styleInc); // TASK: improve
-    if( self::$useMin && file_exists( $s))
+    if( self::$dseUseMin && file_exists( $s))
       $styleInc = $s;
 
     $this->dseStyleInc[] = '<link href="' . $styleInc . '" rel="stylesheet">';
@@ -103,7 +105,7 @@ class WebPage extends View /*@*/
   public function addJSInclude( $jsInc ) /*@*/
   {
     $s = str_replace( '.js', '.min.js', $jsInc); // TASK: improve
-    if( self::$useMin && file_exists( $s))
+    if( self::$dseUseMin && file_exists( $s))
       $jsInc = $s;
 
     $this->dseStyleInc[] = '<script src="' . $jsInc . '"></script>';
@@ -123,7 +125,7 @@ class WebPage extends View /*@*/
   public function newView( $scheme, $escapeAllValues = false ) /*@*/
   {
     $view = new View( $scheme, $escapeAllValues );
-    $view->setPage($this);
+    $view->setController($this);
     $this->dseAllView[] = $view;
 
     return $view;
@@ -133,7 +135,7 @@ class WebPage extends View /*@*/
   public function newControl( $scheme, $escapeAllValues = false ) /*@*/
   {
     $view = new Control( $scheme, $escapeAllValues );
-    $view->setPage($this);
+    $view->setController($this);
     $this->dseAllView[] = $view;
 
     return $view;
@@ -143,7 +145,7 @@ class WebPage extends View /*@*/
   public function newListView() /*@*/
   {
     $list = new ListView();
-    $list->setPage($this);
+    $list->setController($this);
     $this->dseAllView[] = $list;
 
     return $list;
@@ -181,23 +183,24 @@ class WebPage extends View /*@*/
   public function newComponent( $scheme, $escapeAllValues = false ) /*@*/
   {
 
-    $styleIncSrc = $this->dirPrefix . self::$componentsFolder . '$scheme/inc_styles';
-    $styleSrc    = $this->dirPrefix . self::$componentsFolder . '$scheme/style.css';
-
-    $viewFile    = $this->dirPrefix . self::$componentsFolder . '$scheme/view.' . $this->viewFileEnding;
-
-    $jsIncSrc    = $this->dirPrefix . self::$componentsFolder . '$scheme/inc_js';
-    $jsSrc       = $this->dirPrefix . self::$componentsFolder . '$scheme/code.js';
+    $styleIncSrc = self::$dirPrefix . self::$componentsFolder . "$scheme/inc_styles";
+    $styleSrc    = self::$dirPrefix . self::$componentsFolder . "$scheme/style.css";
+    $viewFile    = self::$dirPrefix . self::$componentsFolder . "$scheme/view." . self::$viewFileEnding;
+    $jsIncSrc    = self::$dirPrefix . self::$componentsFolder . "$scheme/inc_js";
+    $jsSrc       = self::$dirPrefix . self::$componentsFolder . "$scheme/code.js";
 
     
     // Inc styles
     
     if( is_dir( $styleIncSrc ))  // DEV
     {
-      // DEV: all files no min
+      $f = scandir( $styleIncSrc );
       
-      foreach( )
-        $this->addStyleInclude( $inc );
+      foreach( $f as $name)
+      {
+        if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+          $this->addStyleInclude( $styleIncSrc . '/' . $name );  // TASK: improve
+      }
 
     }
     
@@ -210,11 +213,13 @@ class WebPage extends View /*@*/
 
     if( is_dir( $jsIncSrc ))  // DEV
     {
-      // DEV: all files no min
+      $f = scandir( $jsIncSrc );
       
-      foreach( )
-        $this->addJSInclude( $inc );
-
+      foreach( $f as $name)
+      {
+        if( ! in_array( $name, ['.', '..']) && strpos( $name, '.min') === false) // && is_readable($full))
+          $this->addStyleInclude( $jsIncSrc . '/' . $name );  // TASK: improve
+      }
     }
 
     // Page JS
