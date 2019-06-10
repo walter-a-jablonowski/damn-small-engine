@@ -58,7 +58,6 @@ $dbRows = ...
 
 // Build
 
-
 $page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
@@ -67,7 +66,7 @@ $layout = $page->newView( 'includes/layout' );
 $layout->myValue  = 'myString';
 $layout->myValue2 = 'myString 2';
 
-// Table (dynamically)
+// Table
 
 $table = $page->newControl( 'controls/table/view' );
 $rows = $page->newListView();
@@ -116,8 +115,7 @@ $dbRows = ...
 
 // Build
 
-
-$page  = new WebPage( 'includes/page' );
+$page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
 
@@ -142,11 +140,11 @@ $comp = $page->newComponent( 'components/demo_comp' );
 //
 // have a look at my_includes/layout.html 2 see where
 
-$comp->myValue  = 'I am a component';
+$comp->content  = 'I am a component';
 $layout->component = $comp;  
 
 
-// Table
+// Table (dynamically)
 
 $table = $page->newControl( 'controls/table/view' );
 

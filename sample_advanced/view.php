@@ -51,8 +51,7 @@ $dbRows = [                    // Demo data or load from db
 
 // Build
 
-
-$page  = new WebPage( 'includes/page' );
+$page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
 
@@ -77,7 +76,7 @@ $comp = $page->newComponent( 'components/demo_comp' );
 //
 // have a look at my_includes/layout.html 2 see where
 
-$comp->myValue  = 'I am a component';
+$comp->content  = 'I am a component';
 $layout->component = $comp;  
 
 

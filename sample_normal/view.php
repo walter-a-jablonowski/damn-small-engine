@@ -46,7 +46,6 @@ $dbRows = [                    // Demo data or load from db
 
 // Build
 
-
 $page = new WebPage( 'includes/page' );
 $layout = $page->newView( 'includes/layout' );
 
