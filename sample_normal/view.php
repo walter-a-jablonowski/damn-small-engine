@@ -27,7 +27,7 @@ if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minifie
 elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );
+WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data

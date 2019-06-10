@@ -48,7 +48,7 @@ if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minifie
 elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );
+WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data
@@ -105,7 +105,7 @@ if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minifie
 elseif( $env == PROD )  WebPage::preferMinified( true );
 
 // Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );
+WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data
@@ -127,6 +127,11 @@ $page->addStyle( 'font-size; 15px;' ); // => page head <style></style>
 // the same for js use: addJSInclude() addJS()
 
 
+// Add some classes 2 h1
+
+$layout->h1Classes = "some classes";  // see my_includes/layout.html, use View's printClasses() or addClasses()
+
+
 // Component
 
 // just add your view, the lib will add needed style and js for the component
@@ -141,7 +146,7 @@ $comp = $page->newComponent( 'components/demo_comp' );
 // have a look at my_includes/layout.html 2 see where
 
 $comp->content  = 'I am a component';
-$layout->component = $comp;  
+$layout->myComponent = $comp;
 
 
 // Table (dynamically)

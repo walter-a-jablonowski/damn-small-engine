@@ -1,5 +1,5 @@
-    <h1><?= $this->headline ?></h1>
+    <h1<?= View::printClasses($this->h1Classes) ?>><?= $this->headline ?></h1>
 
-    <?= $this->component ?>
+    <?= $this->myComponent ?>
 
     <?= $this->table ?>
