@@ -121,12 +121,12 @@ Result:
 
 ## Classes overview
 
-Basic classes
+**Basic classes**
 
 * **View:** A view
 * **ListView:** A view composed of a list of views
 
-Feature classes
+**Feature classes**
 
 * **SimpleControl:** A simple control that uses no style or JS (input, table, ...)
   * basically a synonym for `View`, uses DSEConfig's controlsFolder as additional folder prefix if set
@@ -136,7 +136,7 @@ Feature classes
 * **ComponentBase:** Base class for a component that needs style/js includes and contains implementation
   * or include a component using $webPage->newComponent() if you dont need implementation
 
-Common classes
+**Common classes**
 
 * **DSEConfig:** Config for Damn Small Engine
 * **ViewBase:** Just a simple base class for all view classes
@@ -146,7 +146,7 @@ Common classes
 Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
 
 This library is build upon PHP (license see [credits](credits.md)) and has no further dependecies.\
-Licenses of third party software used in samples see [credits](credits.md)
+Licenses of third party software used in samples see [credits](credits.md).
 
 
 [Privacy](https://walter-a-jablonowski.github.io/privacy.html) | [Legal](https://walter-a-jablonowski.github.io/imprint.html)
