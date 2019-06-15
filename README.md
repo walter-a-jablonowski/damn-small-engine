@@ -129,8 +129,7 @@ Basic classes
 Feature classes
 
 * **SimpleControl:** A simple control that uses no style or JS (input, table, ...)
-  * just synonym for View, adds the ability 2 use a sub folder that you dont need 2 write
-  * see `controlsFolder` below
+  * basically a synonym for `View`, uses DSEConfig's controlsFolder as additional folder prefix if set
 * **WebPage:** Builds a full web page, ability 2 add style, js and components
   * A component is a piece of html that also needs styles and/or
     javascript. This class is able 2 add these in head and body automatically.
@@ -146,7 +145,7 @@ Common classes
 
 Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
 
-This library is build upon PHP (license see [credits](credits.md)) and has no further dependecies.
+This library is build upon PHP (license see [credits](credits.md)) and has no further dependecies.\
 Licenses of third party software used in samples see [credits](credits.md)
 
 
