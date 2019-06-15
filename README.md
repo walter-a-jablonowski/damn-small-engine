@@ -117,7 +117,7 @@ echo $page->render();
 
 Result:
 
-![normal_sample.jpg](wiki/img/normal_sample_35.jpg?raw=true "Normal sample")
+![normal_sample.jpg](wiki/img/normal_sample_45.jpg?raw=true "Normal sample")
 
 ## Classes overview
 
@@ -140,13 +140,6 @@ Feature classes
 Common classes
 
 * **DSEConfig:** Config for Damn Small Engine
-
-  * setPreferMinified( $b )
-  * setDirPrefix(): can be part of name like 'ui_'
-  * setViewFileEnding(): default 'html'
-  * setControlsFolder(): default '' or use 'controls/'
-  * setComponentsFolder(): default '' or use 'components/'
-
 * **ViewBase:** Just a simple base class for all view classes
 
 ## LICENSE
