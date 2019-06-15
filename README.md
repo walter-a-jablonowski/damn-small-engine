@@ -122,7 +122,7 @@ echo $page->render();
 ## Classes overview
 
 <p align="center">
-  <img src="wiki/img/uml_mini.png?raw=true">
+  <img src="https://yuml.me/82a65f5a.png">
 </p>
 
 **Basic classes**
