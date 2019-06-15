@@ -134,7 +134,7 @@ Feature classes
   * A component is a piece of html that also needs styles and/or
     javascript. This class is able 2 add these in head and body automatically.
 * **ComponentBase:** Base class for a component that needs style/js includes and contains implementation
-  * or include a component using $webPage->newComponent()
+  * or include a component using $webPage->newComponent() if you dont need implementation
 
 Common classes
 
