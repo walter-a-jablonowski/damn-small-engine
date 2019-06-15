@@ -8,7 +8,7 @@ namespace WAJ\Lib\Web\DamnSmallEngine;
 
 /*@
 
-A view
+A view (each can have sub views)
 
 USAGE:
 

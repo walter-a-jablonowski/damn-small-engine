@@ -88,8 +88,8 @@ $layout = $page->newView( 'includes/layout' );  //   prefix and type will be add
 
 // Page data
 
-$layout->myValue  = 'myString';
-$layout->myValue2 = 'myString 2';
+$layout->myValue  = 'My dynamic content 1';
+$layout->myValue2 = 'My dynamic content 2';
 
 // Table
 
@@ -115,7 +115,7 @@ $page->attachContent( $layout );
 echo $page->render();
 ```
 
-Result:
+#### Result
 
 ![normal_sample.jpg](wiki/img/normal_sample_45.jpg?raw=true "Normal sample")
 
@@ -123,7 +123,7 @@ Result:
 
 **Basic classes**
 
-* **View:** A view
+* **View:** A view (each can have sub views)
 * **ListView:** A view composed of a list of views
 
 **Feature classes**
@@ -134,7 +134,7 @@ Result:
   * A component is a piece of html that also needs styles and/or
     javascript. This class is able 2 add these in head and body automatically.
 * **ComponentBase:** Base class for a component that needs style/js includes and contains implementation
-  * or include a component using $webPage->newComponent() if you dont need implementation
+  * or include a component using `$webPage->newComponent()` if you don't need implementation
 
 **Common classes**
 

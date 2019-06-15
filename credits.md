@@ -70,7 +70,7 @@ own licenses; we recommend you read them, as their terms may differ from
 the terms above.
 ```
 
-Moder Business theme by https://startbootstrap.com
+Modern Business theme by startbootstrap.com
 ==========================================================
 
 ```
