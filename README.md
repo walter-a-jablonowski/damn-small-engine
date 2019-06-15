@@ -1,7 +1,6 @@
 # Damn Small Engine
 
 **PHP low code templating system - small but powerful**
-Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -60,6 +59,8 @@ Popular third party engines (compare my engine):
 * [Component sample](wiki/Component_sample.md): automatically include style and/or js
 * [Misc samples](wiki/Misc_samples.md)
 
+This sample
+
 * **Run the code:** /sample_normal/view.php
 * **HTML code see:** /sample_normal/my_controls and /sample_normal/my_includes
 
@@ -114,7 +115,9 @@ $page->attachContent( $layout );
 echo $page->render();
 ```
 
-![normal_sample.jpg](wiki/img/normal_sample_25.jpg?raw=true "Normal sample")
+Result:
+
+![normal_sample.jpg](wiki/img/normal_sample_35.jpg?raw=true "Normal sample")
 
 ## Classes overview
 
