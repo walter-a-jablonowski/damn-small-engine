@@ -8,6 +8,8 @@ namespace WAJ\Lib\Web\DamnSmallEngine;
 
 /*@
 
+A view composed of a list of views
+
 Just a container for view classes. Add view classes, on render() all will be rendered in a list.
 
 USAGE:
@@ -24,7 +26,9 @@ class ListView extends ViewBase /*@*/
   
   public static function buildList( $scheme, $values, $escapeAllValues = false ) /*@*/
   {
-    $s = View::$dirPrefix . "$scheme." . View::$viewFileEnding;
+    $config = DSEConfig::instance();
+
+    $s = $config->getDirPrefix() . "$scheme." . $config->getViewFileEnding();
 
     if( ! file_exists( $s ))
       throw new \Exception( "Damn Small Engine: html file missing $s" );

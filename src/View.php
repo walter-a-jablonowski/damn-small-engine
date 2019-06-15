@@ -8,7 +8,7 @@ namespace WAJ\Lib\Web\DamnSmallEngine;
 
 /*@
 
-Represents a view
+A view
 
 USAGE:
 
@@ -17,10 +17,6 @@ USAGE:
 */
 class View extends ViewBase /*@*/
 {
-  const ESCAPE_ALL_VALUES = true;
-
-  public static $dirPrefix = '';  // can be part of name like ui_
-  public static $viewFileEnding = 'html';
 
   protected $dseScheme;              // use unusual names, so cant be confused with generic attributes
   protected $dseValues;
@@ -37,7 +33,10 @@ class View extends ViewBase /*@*/
   */
   public function __construct( $scheme, $escapeAllValues = false ) /*@*/
   {
-    $s = self::$dirPrefix . "$scheme." . self::$viewFileEnding;
+
+    $config = DSEConfig::instance();
+
+    $s = $config->getDirPrefix() . "$scheme." . $config->getViewFileEnding();
 
     if( ! file_exists( $s ))
       throw new \Exception( "Damn Small Engine: html file missing $s" );
@@ -45,22 +44,6 @@ class View extends ViewBase /*@*/
     $this->dseScheme = $scheme;
     $this->dseEscapeAllValues = $escapeAllValues;
   }
-
-
-  /*@
-
-  DESC:
-  
-    Change
-
-    - a prefix that will be prepend each path
-    - the file ending that will be attached each path
-
-    when making a new view using any of the classes in this lib
-
-  */
-  public static function setDirPrefix( $s )      {  self::$dirPrefix = $s;  }
-  public static function setViewFileEnding( $s ) {  self::$viewFileEnding = $s;  } /*@*/
 
 
   /*@
@@ -94,6 +77,17 @@ class View extends ViewBase /*@*/
       $this->dseValues[$name] = ViewBase::escape($value);
     else
       $this->dseValues[$name] = $value;
+  }
+
+
+  /*@
+  
+  Alternative for magic method
+  
+  */
+  public function addSubView( $name, $value ) /*@*/
+  {
+    $this->$name = $value;  // this just forwards call 2 __get()
   }
 
 
@@ -138,7 +132,11 @@ class View extends ViewBase /*@*/
   {
     // TASK: maybe add a func that ensures all values are set, at least ''
 
-    $s = self::$dirPrefix . $this->dseScheme . '.' . self::$viewFileEnding;
+    $config = DSEConfig::instance();
+
+    $s = $config->getDirPrefix() . $this->dseScheme . '.' . $config->getViewFileEnding();
+
+    // !d( $s );
 
     ob_start();
     include( $s );

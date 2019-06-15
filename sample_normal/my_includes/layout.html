@@ -1,10 +1,29 @@
-    <h1>My headline</h1>
+    <h1 class="mt-4 mb-3">Normal sample</h1>
 
-    <?= $this->myValue ?> <br>
-    <?= $this->myValue2 ?> <br>
+    <div class="row">
+      <div class="col-lg-12">
 
-    <br>
-    <br>
+        <p><?= $this->myValue ?></p>
+        
+        <p><strong>Some static content from layout.html:</strong> Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit</p>
 
-    <?= $this->table ?>
+        <p><?= $this->myValue2 ?></p>
 
+      </div>
+      <div class="col-lg-12">
+
+        <?= $this->table ?>
+
+      </div>
+      <div class="col-lg-12">
+
+        <p>entry 2.2 is null, so there will be ""</p>
+        <p>
+          Bootstrap template used:
+          <a href="https://startbootstrap.com/templates/modern-business" target="_blank">Modern Business</a>
+          by <a href="https://startbootstrap.com" target="_blank">startbootstrap.com</a> (slightly modified see style_mode.css),
+          also have a look at <a href="https://getbootstrap.com/docs/4.3/examples" target="_blank">basic samples</a> by bootstrap
+        </p>
+
+      </div>
+    </div>

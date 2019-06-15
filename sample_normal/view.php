@@ -2,16 +2,21 @@
 
 // http://localhost/50-dev-lib-cmn/web/src/php_lib_web/damn-small-engine/sample_normal/view.php
 
+use WAJ\Lib\Web\DamnSmallEngine\ViewBase;
 use WAJ\Lib\Web\DamnSmallEngine\View;
 use WAJ\Lib\Web\DamnSmallEngine\ListView;
 use WAJ\Lib\Web\DamnSmallEngine\WebPage;
-use WAJ\Lib\Web\DamnSmallEngine\Control;
+use WAJ\Lib\Web\DamnSmallEngine\SimpleControl;
+use WAJ\Lib\Web\DamnSmallEngine\DSEConfig;
 
 require '../src/ViewBase.php';
 require '../src/View.php';
 require '../src/ListView.php';
 require '../src/WebPage.php';
-require '../src/Control.php';
+require '../src/SimpleControl.php';
+require '../src/DSEConfig.php';
+
+require 'kint.phar';
 
 
 define('DEBUG', 'DEBUG');
@@ -23,23 +28,25 @@ $env = DEBUG;
 
 // Some config
 
-if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
-elseif( $env == PROD )  WebPage::preferMinified( true );
+$config = DSEConfig::instance();
 
-// Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+if( $env == DEBUG )     $config->preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  $config->preferMinified( true );
+
+// $config->setControlsFolder('controls/');
+$config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data
 
 $dbRows = [                    // Demo data or load from db
-  'row 1' => [
-    'field 1' => 'entry 1.1',
-    'field 2' => 'entry 1.2'
+  0 => [
+    'col_1' => 'entry 1.1',
+    'col_2' => 'entry 1.2'
   ],
-  'row 2' => [
-    'field 1' => 'entry 2.1',
-    'field 2' => null
+  1 => [
+    'col_1' => 'entry 2.1',
+    'col_2' => null
   ]
 ];
 
@@ -51,27 +58,27 @@ $layout = $page->newView( 'includes/layout' );  //   prefix and type will be add
 
 // Page data
 
-$layout->myValue  = 'myString';
-$layout->myValue2 = 'myString 2';
+$layout->myValue  = 'My dynamic content 1';
+$layout->myValue2 = 'My dynamic content 2';
 
 // Table
 
-$table = $page->newControl( 'controls/table/view' );
-$rows = $page->newListView();  // instead you may use ListView::buildList( ... );
-                               // see basic sample
+$table = $page->newSimpleControl( 'controls/table/view' );  // column headings asre hard coded see my_controls/table/view.html
+$rows = $page->newListView();        // instead you could use ListView::buildList( ... );
+                                     // for the whole table, see basic sample
 
-foreach( $dbRows as $id => $dbRow )
-{
+foreach( $dbRows as $id => $dbRow )  // if you prefer, you also could use a for loop in
+{                                    //   html instaad, see Misc_sample file
   $row = $page->newView( 'controls/table/row' );
 
-  $row->field1 = $dbRow['field 1'];  // you could also use: $row->setValues( $dbRow );
-  $row->field2 = $dbRow['field 2'];
+  $row->field1 = $dbRow['col_1'];    // you could also use: $row->setValues( $dbRow );
+  $row->field2 = $dbRow['col_2'];
   
   $rows->addView( $row );
 }
 
-$table->content = $rows;
-$layout->table = $table;
+$table->addSubView( 'content', $rows );
+$layout->addSubView( 'table', $table );
 $page->attachContent( $layout );
 
 

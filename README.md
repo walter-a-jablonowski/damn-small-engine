@@ -1,14 +1,13 @@
 # Damn Small Engine
 
 **PHP low code templating system - small but powerful**
-
-Visit my personal homepage: https://walter-a-jablonowski.github.io
+Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This was tested using PHP 7.1.9, it should work from 5.3 and above.
+This was tested using PHP 7.1.9, should at leat run on 7.1.9 and above.
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](Basic_sample.md)), although there are more classes providing features: WebPage and Control (see samples below).
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](wiki/Basic_sample.md)), although there are more classes providing features: WebPage and Control ([see samples below](https://github.com/walter-a-jablonowski/damn-small-engine#normal-sample)).
 
 If you like run the sample code in /sample_normal, /sample_advanced and /sample_basic.
 
@@ -16,9 +15,27 @@ If you like run the sample code in /sample_normal, /sample_advanced and /sample_
 composer require walter-a-jablonowski/damn-small-engine
 ```
 
+**Table of contents**
+
+* [Compare it](https://github.com/walter-a-jablonowski/damn-small-engine#compare-it)
+* [Features](https://github.com/walter-a-jablonowski/damn-small-engine#features)
+* [Normal sample](https://github.com/walter-a-jablonowski/damn-small-engine#normal-sample)
+  * also includes samples overview
+* [Classes overview](https://github.com/walter-a-jablonowski/damn-small-engine#classes)
+* [License](https://github.com/walter-a-jablonowski/damn-small-engine#license)
+
+> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
+
+## Compare it
+
+Popular third party engines (compare my engine):
+
+* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusualy syntax, but some nice features. All logic in code, like Damn Small Engine. The engine code seems too large, should be maintainable (just in case there are no updates).
+* [Blend]() (free) - 
+
 ## Features
 
-* **Just 2 small classes** (can easily be modified), 2 additional classes providing features
+* **Small:** Just 2 small classes for basic use (can easily be modified), additional classes providing more features (small compared 2 third party engines)
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
@@ -36,7 +53,12 @@ composer require walter-a-jablonowski/damn-small-engine
 
 **Building a page and bootstrap 4.3 table**
 
-:grey_exclamation: There is also a much [simpler sample](Basic_sample.md), that used only the most basic 2 classes and also has some additional usage features. You can find a more **complex sample** below. See API for more info **(currently missing)**.
+:grey_exclamation: There are more samples available
+
+* A much [simpler sample](wiki/Basic_sample.md), that used only the most basic 2 classes
+* [Advanced sample](wiki/Advanced_sample.md): style/js includes, add classes, dynamic table
+* [Component sample](wiki/Component_sample.md): automatically include style and/or js
+* [Misc samples](wiki/Misc_samples.md)
 
 * **Run the code:** /sample_normal/view.php
 * **HTML code see:** /sample_normal/my_controls and /sample_normal/my_includes
@@ -44,11 +66,13 @@ composer require walter-a-jablonowski/damn-small-engine
 ```php
 // Some config
 
-if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
-elseif( $env == PROD )  WebPage::preferMinified( true );
+$config = DSEConfig::instance();
 
-// Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+if( $env == DEBUG )     $config->preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  $config->preferMinified( true );
+
+// $config->setControlsFolder('controls/');
+$config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data
@@ -68,154 +92,66 @@ $layout->myValue2 = 'myString 2';
 
 // Table
 
-$table = $page->newControl( 'controls/table/view' );
-$rows = $page->newListView();  // instead you may use ListView::buildList( ... );
-                               // see basic sample
+$table = $page->newSimpleControl( 'controls/table/view' );  // column headings asre hard coded see my_controls/table/view.html
+$rows = $page->newListView();        // instead you could use ListView::buildList( ... );
+                                     // for the whole table, see basic sample
 
-foreach( $dbRows as $id => $dbRow )
-{
+foreach( $dbRows as $id => $dbRow )  // if you prefer, you also could use a for loop in
+{                                    //   html instaad, see Misc_sample file
   $row = $page->newView( 'controls/table/row' );
 
-  $row->field1 = $dbRow['field 1'];  // you could also use: $row->setValues( $dbRow );
-  $row->field2 = $dbRow['field 2'];
+  $row->field1 = $dbRow['col_1'];    // you could also use: $row->setValues( $dbRow );
+  $row->field2 = $dbRow['col_2'];
   
   $rows->addView( $row );
 }
 
-$table->content = $rows;
-$layout->table = $table;
+$table->addSubView( 'content', $rows );
+$layout->addSubView( 'table', $table );
 $page->attachContent( $layout );
 
 
 echo $page->render();
 ```
 
-## Advanced sample
+![normal_sample.jpg](wiki/img/normal_sample_25.jpg?raw=true "Normal sample")
 
-**... and building a bootstrap 4.3 table dynamically** (for every database table)
+## Classes overview
 
-**still debugging this one**
+Basic classes
 
-This sample also adds some style and classes, and uses a "component", a html block that needs special style and js files. These will be automatically included. See API for more info **(currently missing)**.
+* **View:** A view
+* **ListView:** A view composed of a list of views
 
-* **Run the code:** /sample_advanced/view.php
-* **HTML code see:** /sample_advanced/my_controls and /sample_advanced/my_includes
+Feature classes
 
-```php
-// Some config
+* **SimpleControl:** A simple control that uses no style or JS (input, table, ...)
+  * just synonym for View, adds the ability 2 use a sub folder that you dont need 2 write
+  * see `controlsFolder` below
+* **WebPage:** Builds a full web page, ability 2 add style, js and components
+  * A component is a piece of html that also needs styles and/or
+    javascript. This class is able 2 add these in head and body automatically.
+* **ComponentBase:** Base class for a component that needs style/js includes and contains implementation
+  * or include a component using $webPage->newComponent()
 
-if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
-elseif( $env == PROD )  WebPage::preferMinified( true );
+Common classes
 
-// Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+* **DSEConfig:** Config for Damn Small Engine
 
+  * setPreferMinified( $b )
+  * setDirPrefix(): can be part of name like 'ui_'
+  * setViewFileEnding(): default 'html'
+  * setControlsFolder(): default '' or use 'controls/'
+  * setComponentsFolder(): default '' or use 'components/'
 
-// Data
-
-$dbRows = ...
-
-
-// Build
-
-$page = new WebPage( 'includes/page' );
-$layout = $page->newView( 'includes/layout' );
-
-
-// Add some style dynamically (or do in html)
-
-$page->addStyleInclude( 'includes/styles/style.css' );
-$page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
-
-// the same for js use: addJSInclude() addJS()
-
-
-// Add some classes dynamically
-
-$layout->h1Classes = "some classes";
-// see my_includes/layout.html, use View's printClasses() or addClasses()
-
-
-// Component
-
-// just add your view, the lib will add needed style and js for the component
-
-$comp = $page->newComponent( 'components/demo_comp' );
-//
-// this will also include
-//
-//        my_components/demo_comp/style.css  =>  page head <style></style>
-//   and  my_components/demo_comp/code.js    =>  page <script></script>
-//   and  my_components/demo_comp/style_includes/dummy.css
-//   and  my_components/demo_comp/style_includes/dummy2.css
-//   and  my_components/demo_comp/js_includes/dummy.js
-//
-// have a look at my_includes/layout.html and see where
-
-$comp->content  = 'I am a component';
-$layout->myComponent = $comp;
-
-
-// Table (dynamically)
-
-$table = $page->newControl( 'controls/table/view' );
-
-$this->tableClasses   = '';  // no additional classes
-$this->headClasses    = '';
-$this->headRowClasses = '';
-$this->bodyClasses    = '';
-
-// Table header
-
-$headCells = $page->newListView();
-
-foreach( $dbRows[0] as $name => $value )
-{
-  $headCell = $page->newView( 'controls/table/head_cell' );
-  $headCell->content = $value;
-  $headCells->addView( $headCell );
-}
-
-$table->headContent = $headCells;
-
-// Table lines
-
-$rows = $page->newListView();
-
-foreach( $dbRows as $id => $dbRow )
-{
-  $row = $page->newView( 'controls/table/row' );
-  $cells = $page->newListView();
-  
-  // Table cells
-
-  $i = 0;
-  foreach( $dbRow as $name => $value )
-  {
-    $i++;
-
-    if( $i == 1 )
-      $cell = $page->newView( 'controls/table/first_cell' );  // first cell differs, see https://getbootstrap.com/docs/4.3/content/tables
-    else
-      $cell = $page->newView( 'controls/table/cell' );
-
-    $cell->content = $value;
-    $cells->addView( $cell );
-  }
-    
-  $row->content = $cells;
-  $rows->addView( $row );
-}
-
-$table->bodyContent = $rows;
-
-$layout->content = $table;
-$page->attachContent( $layout );
-
-
-echo $page->render();
-```
+* **ViewBase:** Just a simple base class for all view classes
 
 ## LICENSE
 
 Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
+
+This library is build upon PHP (license see [credits](credits.md)) and has no further dependecies.
+Licenses of third party software used in samples see [credits](credits.md)
+
+
+[Privacy](https://walter-a-jablonowski.github.io/privacy.html) | [Legal](https://walter-a-jablonowski.github.io/imprint.html)

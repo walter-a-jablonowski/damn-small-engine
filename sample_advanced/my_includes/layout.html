@@ -1,5 +1,10 @@
-    <h1<?= View::printClasses($this->h1Classes) ?>><?= $this->headline ?></h1>
+<?php
 
-    <?= $this->myComponent ?>
+use WAJ\Lib\Web\DamnSmallEngine\View;
+
+require '../src/View.php';
+
+?> 
+    <h1<?= View::printClasses($this->h1Classes) ?>><?= $this->headline ?></h1>
 
     <?= $this->table ?>

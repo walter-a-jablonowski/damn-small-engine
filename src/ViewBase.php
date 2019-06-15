@@ -1,6 +1,6 @@
 <?php
 
-// Copyright (C) Walter A. Jablonowski 2019, MIT License
+// Copyright (C) Walter A. Jablonowski 2018-2019, MIT License
 // https://github.com/walter-a-jablonowski/damn-small-engine
 
 namespace WAJ\Lib\Web\DamnSmallEngine;
@@ -8,7 +8,7 @@ namespace WAJ\Lib\Web\DamnSmallEngine;
 
 /*@
 
-Base class for a view
+Just a simple base class for all view classes
 
 */
 abstract class ViewBase /*@*/

@@ -2,16 +2,19 @@
 
 // http://localhost/50-dev-lib-cmn/web/src/php_lib_web/damn-small-engine/sample_advanced/view.php
 
+use WAJ\Lib\Web\DamnSmallEngine\ViewBase;
 use WAJ\Lib\Web\DamnSmallEngine\View;
 use WAJ\Lib\Web\DamnSmallEngine\ListView;
 use WAJ\Lib\Web\DamnSmallEngine\WebPage;
-use WAJ\Lib\Web\DamnSmallEngine\Control;
+use WAJ\Lib\Web\DamnSmallEngine\SimpleControl;
+use WAJ\Lib\Web\DamnSmallEngine\DSEConfig;
 
 require '../src/ViewBase.php';
 require '../src/View.php';
 require '../src/ListView.php';
 require '../src/WebPage.php';
-require '../src/Control.php';
+require '../src/SimpleControl.php';
+require '../src/DSEConfig.php';
 
 require 'kint.phar';
 
@@ -28,23 +31,25 @@ $env = DEBUG;
 
 // Some config
 
-if( $env == DEBUG )     WebPage::preferMinified( false );  // should use minified version ?
-elseif( $env == PROD )  WebPage::preferMinified( true );
+$config = DSEConfig::instance();
 
-// Control::setControlsFolder('controls/');
-WebPage::setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+if( $env == DEBUG )     $config->preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  $config->preferMinified( true );
+
+// $config->setControlsFolder('controls/');
+$config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
 
 
 // Data
 
 $dbRows = [                    // Demo data or load from db
-  'row 1' => [
-    'field 1' => 'entry 1.1',
-    'field 2' => 'entry 1.2'
+  0 => [
+    'col_1' => 'entry 1.1',
+    'col_2' => 'entry 1.2'
   ],
-  'row 2' => [
-    'field 1' => 'entry 2.1',
-    'field 2' => null
+  1 => [
+    'col_1' => 'entry 2.1',
+    'col_2' => null
   ]
 ];
 
@@ -57,59 +62,41 @@ $layout = $page->newView( 'includes/layout' );
 
 // Add some style dynamically (or do in html)
 
-$page->addStyleInclude( 'includes/styles/style.css' );
-$page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
+// $page->addStyleInclude( 'includes/styles/style.css' );                                 // Task:
+// $page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
 
 // the same for js use: addJSInclude() addJS()
 
 
 // Add some classes dynamically
 
-$layout->h1Classes = "some classes";
+// $layout->h1Classes = "some classes";
 // see my_includes/layout.html, use View's printClasses() or addClasses()
-
-
-// Component
-
-// just add your view, the lib will add needed style and js for the component
-
-$comp = $page->newComponent( 'components/demo_comp' );
-//
-// this will also include
-//
-//        my_components/demo_comp/style.css  =>  page head <style></style>
-//   and  my_components/demo_comp/code.js    =>  page <script></script>
-//   and  my_components/demo_comp/style_includes/dummy.css
-//   and  my_components/demo_comp/style_includes/dummy2.css
-//   and  my_components/demo_comp/js_includes/dummy.js
-//
-// have a look at my_includes/layout.html and see where
-
-$comp->content  = 'I am a component';
-$layout->myComponent = $comp;
 
 
 // Table (dynamically)
 
-$table = $page->newControl( 'controls/table/view' );
+$table = $page->newSimpleControl( 'controls/table/view' );
 
-$this->tableClasses   = '';  // no additional classes
-$this->headClasses    = '';
-$this->headRowClasses = '';
-$this->bodyClasses    = '';
+// $table->tableClasses   = '';  // no additional classes
+// $table->headClasses    = '';
+// $table->headRowClasses = '';
+// $table->bodyClasses    = '';
 
 // Table header
 
+$colNames = ['Column 1', 'Column 2'];
+
 $headCells = $page->newListView();
 
-foreach( $dbRows[0] as $name => $value )
+foreach( $colNames as $name => $value )
 {
   $headCell = $page->newView( 'controls/table/head_cell' );
   $headCell->content = $value;
   $headCells->addView( $headCell );
 }
 
-$table->headContent = $headCells;
+$table->addSubView( 'headContent', $headCells );
 
 // Table lines
 
@@ -132,21 +119,21 @@ foreach( $dbRows as $id => $dbRow )
     else
       $cell = $page->newView( 'controls/table/cell' );
 
-    $cell->content = $value;
+    $cell->addSubView( 'content', $value );
     $cells->addView( $cell );
   }
     
-  $row->content = $cells;
+  $row->addSubView( 'content', $cells );
   $rows->addView( $row );
 }
 
-$table->bodyContent = $rows;
-
-$layout->content = $table;
+$table->addSubView( 'bodyContent', $rows );
+$layout->addSubView( 'content', $table );
 $page->attachContent( $layout );
 
 
-// !d( $page );
+// !d( $page ); 
+// var_dump( $page ); 
 
 echo $page->render();
 

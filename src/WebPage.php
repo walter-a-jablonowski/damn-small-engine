@@ -1,16 +1,14 @@
 <?php
 
-// Copyright (C) Walter A. Jablonowski 2019, MIT License
+// Copyright (C) Walter A. Jablonowski 2018-2019, MIT License
 // https://github.com/walter-a-jablonowski/damn-small-engine
 
 namespace WAJ\Lib\Web\DamnSmallEngine;
 
-require 'kint.phar';
-
 
 /*@
 
-  A full web page, ability 2 add style, js and components
+  Builds a full web page, ability 2 add style, js and components
   
   A component is a piece of html that also needs styles and/or
   javascript. This class is able 2 add these in head and body automatically.
@@ -23,8 +21,6 @@ require 'kint.phar';
   - $this->pageJS
   
   - $this->content
-
-  Also holds common vars (overwrites ViewBase defaults)
 
 USAGE:
 
@@ -39,9 +35,6 @@ TASKS:
 class WebPage extends View /*@*/
 {
 
-  protected static $componentsFolder = ''; // or use components/
-  protected static $dseUseMin = false;
-  
   protected $dseAllView;  // Just for fun, seems no need (see class comment), but the code seems nicer
 
   protected $dseStyleInc = [];
@@ -72,25 +65,13 @@ class WebPage extends View /*@*/
 
 
   /*@ */
-  public static function setComponentsFolder( $s ) {  self::$componentsFolder = $s;  } /*@*/
-
-
-  /*@ */
-  public static function preferMinified( $dseUseMin ) /*@*/
-  {
-    self::$dseUseMin = $dseUseMin;
-  }
-
-
-
-  /*@ */
   public function addStyleInclude( $styleInc ) /*@*/
   {
-    $s = str_replace( '.css', '.min.css', $styleInc); // TASK: improve
-    if( self::$dseUseMin && file_exists( $s))
-      $styleInc = $s;
+    $config = DSEConfig::instance();
 
-    $styleInc = self::$dirPrefix . $this->scheme;
+    $s = str_replace( '.css', '.min.css', $styleInc); // TASK: improve
+    if( $config->getPreferMinified() && file_exists( $s))
+      $styleInc = $s;
 
     $this->dseStyleInc[] = '<link href="' . $styleInc . '" rel="stylesheet">';
   }
@@ -106,13 +87,13 @@ class WebPage extends View /*@*/
   /*@ */
   public function addJSInclude( $jsInc ) /*@*/
   {
+    $config = DSEConfig::instance();
+
     $s = str_replace( '.js', '.min.js', $jsInc); // TASK: improve
-    if( self::$dseUseMin && file_exists( $s))
+    if( $config->getPreferMinified() && file_exists( $s))
       $jsInc = $s;
 
-    $jsInc = self::$dirPrefix . $this->scheme;
-
-    $this->dseStyleInc[] = '<script src="' . $jsInc . '"></script>';
+    $this->dseJSInc[] = '<script src="' . $jsInc . '"></script>';
   }
 
 
@@ -136,9 +117,9 @@ class WebPage extends View /*@*/
   }
 
   /*@ */
-  public function newControl( $scheme, $escapeAllValues = false ) /*@*/
+  public function newSimpleControl( $scheme, $escapeAllValues = false ) /*@*/
   {
-    $view = new Control( $scheme, $escapeAllValues );
+    $view = new SimpleControl( $scheme, $escapeAllValues );
     $view->setController($this);
     $this->dseAllView[] = $view;
 
@@ -186,12 +167,43 @@ class WebPage extends View /*@*/
   */
   public function newComponent( $scheme, $escapeAllValues = false ) /*@*/
   {
+    $config = DSEConfig::instance();
+    
+    $viewFile = $config->getComponentsFolder() . "$scheme/view";
+    $this->loadDependencies( $scheme, $escapeAllValues );
 
-    $styleIncSrc = self::$componentsFolder . "$scheme/style_includes";
-    $styleSrc    = self::$componentsFolder . "$scheme/style.css";
-    $viewFile    = self::$componentsFolder . "$scheme/view";
-    $jsIncSrc    = self::$componentsFolder . "$scheme/js_includes";
-    $jsSrc       = self::$componentsFolder . "$scheme/code.js";
+    $view = $this->addView( $viewFile, $escapeAllValues );
+
+    return $view;
+  }
+
+
+  /*@
+
+  Add a component which is html that has own style and/or js
+  
+  */
+  public function newDerivedComponent( $class, ...$args ) /*@*/
+  {
+    
+    $c = new $class( ...$args );
+    
+    $this->loadDependencies( $c->getScheme() );
+
+    return $c;
+  }
+
+
+  // Load component dependencies in local arrays (normal comment cause private)
+
+  private function loadDependencies( $scheme, $escapeAllValues = false )
+  {
+    $config = DSEConfig::instance();
+
+    $styleIncSrc = $config->getDirPrefix() . $config->getComponentsFolder() . "$scheme/style_includes";
+    $styleSrc    = $config->getDirPrefix() . $config->getComponentsFolder() . "$scheme/style.css";
+    $jsIncSrc    = $config->getDirPrefix() . $config->getComponentsFolder() . "$scheme/js_includes";
+    $jsSrc       = $config->getDirPrefix() . $config->getComponentsFolder() . "$scheme/code.js";
 
     
     // Inc styles
@@ -236,13 +248,6 @@ class WebPage extends View /*@*/
     
     if( file_exists( $jsSrc ))
       $this->addJSInclude( file_get_contents( $jsSrc ));
-
-
-    // View  
-    
-    $view = $this->addView( $viewFile, $escapeAllValues );
-    
-    return $view;
   }
 
 
@@ -258,18 +263,21 @@ class WebPage extends View /*@*/
   {
     // TASK: ensure needed anchoes are there for style and js
 
-    $this->dseStyleInc  = array_unique( $this->dseStyleInc );
-    $this->dsePageStyle = array_unique( $this->dsePageStyle );
-    $this->dseJSInc     = array_unique( $this->dseJSInc );
-    $this->dsePageJS    = array_unique( $this->dsePageJS );
-
-    $this->styleIncludes = implode( "\n", $this->dseStyleInc);
-    $this->pageStyle     = implode( "\n", $this->dsePageStyle);
-    $this->JSIncludes    = implode( "\n", $this->dseJSInc);
-    $this->pageJS        = implode( "\n", $this->dsePageJS);
+    // All styles and js from local arrays => anchors
     
-    $this->pageStyle     = "<style>\n\n"  . implode( "\n", $this->dsePageStyle) . "\n\n</style>";
-    $this->pageJS        = "<script>\n\n" . implode( "\n", $this->dsePageJS)    . "\n\n</script>";
+    $this->styleIncludes = array_unique( $this->dseStyleInc );
+    $this->pageStyle     = array_unique( $this->dsePageStyle );
+    $this->JSIncludes    = array_unique( $this->dseJSInc );
+    $this->pageJS        = array_unique( $this->dsePageJS );
+
+    $this->styleIncludes = implode( "\n", $this->styleIncludes);
+    $this->pageStyle     = implode( "\n", $this->pageStyle);
+    $this->JSIncludes    = implode( "\n", $this->JSIncludes);
+    $this->pageJS        = implode( "\n", $this->pageJS);
+    
+    $this->pageStyle     = "<style>\n\n"  . $this->pageStyle . "\n\n</style>";
+    $this->pageJS        = "<script>\n\n" . $this->pageJS    . "\n\n</script>";
+
 
     return parent::render();
   }

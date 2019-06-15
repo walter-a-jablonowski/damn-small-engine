@@ -2,9 +2,10 @@
 
 **PHP low code templating system - small but powerful**
 
+
 ## Basic sample
 
-Minimal sample, also showing some additional features. This only uses the classes **View** and **ListView**. For the advanced samples see [Readme](README.md)
+Minimal sample, also showing some additional features. This only uses the classes **View** and **ListView**. For the advanced samples see [Readme](README.md). See also class comments in /src (API desc currently missing).
 
 * **Run the code:** /sample_basic/view.php
 * **HTML code see below or:** /sample_basic/includes
@@ -12,19 +13,10 @@ Minimal sample, also showing some additional features. This only uses the classe
 ```php
 // Demo data
 
-$listData = [                     // or load from db
-  'row 1' => [
-    'field 1' => 'entry 1.1',
-    'field 2' => 'entry 1.2'
-  ],
-  'row 2' => [
-    'field 1' => 'entry 2.1',
-    'field 2' => 'entry 2.2'
-  ]
-];
+$listData = ...
 
 
-// Make a view, add values            // You could add View( ..., View::ESCAPE_ALL_VALUES ) which
+// Make a view, add values            // You could add View( ..., DSEConfig::ESCAPE_ALL_VALUES ) which
                                       //   is htmlspecialchars() for all added values, or do it yourself
 $view = new View( 'includes/main' );  // The '.html' will be added => 'includes/main.html'
 $view->myVal = 'sample value';        // Just add what you need
@@ -57,13 +49,6 @@ foreach( $listData as $rowValues )
 $view->list2 = $listView;
 
 
-// Alternative version
-
-$list5 = new View( 'includes/list2_entries' );
-$list5->setValues( $listData );
-$view->list5 = $list5;
-
-
 // You could also add: views - in a list - in a view - in a list
 
 $outerList = new ListView();
@@ -71,7 +56,7 @@ $outerList = new ListView();
 for( $i=0; $i < 2; $i++ )
 {
   $entryView = new View( 'includes/table' );
-  $innerList = ListView::buildList( 'includes/list1_entry', $listData );
+  $innerList = ListView::buildList( 'includes/list_entry', $listData );
   $entryView->list = $innerList;
   
   $outerList->addView( $entryView );
@@ -85,7 +70,7 @@ $view->listInList = $outerList;
 echo $view;
 ```
 
-### includes/main.html
+### includes/view.html
 
 ```php
 <html>
@@ -113,13 +98,6 @@ echo $view;
     </table>
     
     
-    <!-- List 5 -->
-    
-    <h3>List 5</h3>
-
-    <?= $this->list5 ?>
-
-
     <!-- List in list -->
     
     <h3>List in list</h3>
@@ -143,7 +121,7 @@ echo $view;
 </table>
 ```
 
-### includes/list1_entry.html
+### includes/list_entry.html
 
 This is how you would use it if there is a blank in value name.
 
@@ -151,20 +129,9 @@ This is how you would use it if there is a blank in value name.
 <tr><td><?= $this->dseValues['field 1'] ?></td><td><?= $this->dseValues['field 2'] ?></td></tr>
 ```
 
-### includes/list2_entries.html
-
-```php
-<table>
-
-<?php foreach( $this->getValues() as $rowValues ): ?>
-
-  <tr><td><?= $rowValues['field 1'] ?></td><td><?= $rowValues['field 2'] ?></td></tr>
-
-<?php endforeach; ?>
-
-</table>
-```
-
 ## LICENSE
 
 Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
+
+
+[Privacy](https://walter-a-jablonowski.github.io/privacy.html) | [Legal](https://walter-a-jablonowski.github.io/imprint.html)
