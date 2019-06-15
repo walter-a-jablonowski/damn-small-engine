@@ -11,6 +11,17 @@ Minimal sample, also showing some additional features. This only uses the classe
 * **HTML code see below or:** /sample_basic/includes
 
 ```php
+// Some config
+
+$config = DSEConfig::instance();
+
+if( $env == DEBUG )     $config->preferMinified( false );  // should use minified version ?
+elseif( $env == PROD )  $config->preferMinified( true );
+
+$config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+// $config->setControlsFolder('controls/');
+
+
 // Demo data
 
 $listData = ...

@@ -93,12 +93,12 @@ $layout->myValue2 = 'My dynamic content 2';
 
 // Table
 
-$table = $page->newSimpleControl( 'controls/table/view' );  // column headings asre hard coded see my_controls/table/view.html
+$table = $page->newSimpleControl( 'controls/table/view' );  // column headings are hard coded see my_controls/table/view.html
 $rows = $page->newListView();        // instead you could use ListView::buildList( ... );
-                                     // for the whole table, see basic sample
+                                     //   for the whole table, see basic sample
 
 foreach( $dbRows as $id => $dbRow )  // if you prefer, you also could use a for loop in
-{                                    //   html instaad, see Misc_sample file
+{                                    //   html instead, see "misc samples"
   $row = $page->newView( 'controls/table/row' );
 
   $row->field1 = $dbRow['col_1'];    // you could also use: $row->setValues( $dbRow );
@@ -115,15 +115,23 @@ $page->attachContent( $layout );
 echo $page->render();
 ```
 
-#### Result
+### Result
 
 ![normal_sample.jpg](wiki/img/normal_sample_45.jpg?raw=true "Normal sample")
 
 ## Classes overview
 
+![uml_mini.png](wiki/img/uml_mini.png?raw=true "UML mini")
+
+<p align="center">
+  <img src="wiki/img/uml_mini.png?raw=true">
+</p>
+
+<img align="center" src="wiki/img/uml_mini.png?raw=true">
+
 **Basic classes**
 
-* **View:** A view (each can have sub views)
+* **View:** A view (each view or sub view can have sub views)
 * **ListView:** A view composed of a list of views
 
 **Feature classes**

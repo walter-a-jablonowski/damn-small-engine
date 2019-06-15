@@ -36,8 +36,8 @@ $config = DSEConfig::instance();
 if( $env == DEBUG )     $config->preferMinified( false );  // should use minified version ?
 elseif( $env == PROD )  $config->preferMinified( true );
 
-// $config->setControlsFolder('controls/');
 $config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on new View( ... )
+// $config->setControlsFolder('controls/');
 
 
 // Data
