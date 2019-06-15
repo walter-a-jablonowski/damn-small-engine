@@ -121,13 +121,9 @@ echo $page->render();
 
 ## Classes overview
 
-![uml_mini.png](wiki/img/uml_mini.png?raw=true "UML mini")
-
 <p align="center">
   <img src="wiki/img/uml_mini.png?raw=true">
 </p>
-
-<img align="center" src="wiki/img/uml_mini.png?raw=true">
 
 **Basic classes**
 
