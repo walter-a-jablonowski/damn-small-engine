@@ -25,12 +25,12 @@ composer require walter-a-jablonowski/damn-small-engine
 
 > If you like visit my personal homepage: [walter-a-jablonowski.github.io](https://walter-a-jablonowski.github.io)
 
-## Compare Damn Small Egine
+## Compare Damn Small Engine
 
 ... with popular templating systems:
 
 * [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, just like Damn Small Engine, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
-* [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their featues, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
+* [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their features, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
 
 ## Features
 
@@ -47,7 +47,7 @@ composer require walter-a-jablonowski/damn-small-engine
   * just use PHP's syntax that you know well, you can easily compose your view
 * ... and **all PHP language features** are available
 
-**Can't get any updates?** ... for your prefered templating system anymore? Does it have massive codes, maintainance impossibile? No problem with Damn Small Engine. This thing is so small, you can easily understand the code and maintain or extend it yourself.
+**Can't get any updates?** ... for your preferred templating system anymore? Does it have massive codes, maintenance impossible? No problem with Damn Small Engine. This thing is so small, you can easily understand the code and maintain or extend it yourself.
 
 ## Normal sample
 
@@ -84,7 +84,7 @@ $dbRows = ...
 
 // Build
 
-$page = new WebPage( 'includes/page' );         // looks like hierachical identifier, is also: a file path
+$page = new WebPage( 'includes/page' );         // looks like hierarchical identifier, is also: a file path
 $layout = $page->newView( 'includes/layout' );  //   prefix and type will be added => my_includes/page.html
 
 // Page data

@@ -51,7 +51,7 @@ $dbRows = [                    // Demo data or load from db
 
 // Build
 
-$page = new WebPage( 'includes/page' );         // looks like hierachical identifier, is also: a file path
+$page = new WebPage( 'includes/page' );         // looks like hierarchical identifier, is also: a file path
 $layout = $page->newView( 'includes/layout' );  //   prefix and type will be added => my_includes/page.html
 
 // Page data
