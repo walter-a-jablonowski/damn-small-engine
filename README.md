@@ -14,8 +14,6 @@ If you like run the sample code in /sample_normal, /sample_advanced and /sample_
 composer require walter-a-jablonowski/damn-small-engine
 ```
 
-> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
-
 **Table of contents**
 
 * [Compare it](https://github.com/walter-a-jablonowski/damn-small-engine#compare-it)
@@ -24,6 +22,8 @@ composer require walter-a-jablonowski/damn-small-engine
   * also includes samples overview
 * [Classes overview](https://github.com/walter-a-jablonowski/damn-small-engine#classes)
 * [License](https://github.com/walter-a-jablonowski/damn-small-engine#license)
+
+> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
 
 ## Compare Damn Small Egine
 
