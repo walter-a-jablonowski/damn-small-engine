@@ -29,7 +29,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ... with popular templating systems:
 
-* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, just like Damn Small Engine, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
+* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
 * [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their features, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
 
 ## Features
@@ -41,8 +41,9 @@ composer require walter-a-jablonowski/damn-small-engine
 * **Automatically import** component specific styles and js in a web page
   * just add your html block in `WebPage`, the rest will be done by this lib
 * This lib is like `$view->subView = new ListView( ... )` (or variations of it)
-* **All logic in code!** Template files don't have any control structures (as it should be)
+* **All logic in code!** Template files don't need any control structures (as it should be)
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
+  * In fact logic in templates ***is possible***, see [misc samples](wiki/Misc_samples.md) (no recommendation)
 * You don't have 2 learn a new syntax => **no problems fixing syntax bugs**
   * just use PHP's syntax that you know well, you can easily compose your view
 * ... and **all PHP language features** are available

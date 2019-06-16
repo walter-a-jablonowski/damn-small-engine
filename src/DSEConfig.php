@@ -14,14 +14,14 @@ Config for Damn Small Engine
 class DSEConfig /*@*/
 {
 
-  const ESCAPE_ALL_VALUES = true;
-
   protected $dirPrefix = '';           // can be part of name like 'ui_'
   protected $viewFileEnding = 'html';
-  protected $controlsFolder = '';      // or use 'controls/'
-  protected $componentsFolder = '';    // or use 'components/'
+  protected $controlsFolder = '';      // may use 'controls/'
+  protected $componentsFolder = '';    // may use 'components/'
 
   protected $useMin = false;
+
+  protected $defaultEscapeFunc = false;
 
   private static $instance;
 
@@ -35,6 +35,16 @@ class DSEConfig /*@*/
     return self::$instance;
   }
 
+/*
+  public function __construct( $scheme, $escapeAllValues = false ) /*@* /
+  {
+
+    $this->defaultEscapeFunc = function( $value ) {
+
+      return htmlspecialchars( $value );
+    };
+  }
+*/
 
   /*@
 
@@ -67,6 +77,11 @@ class DSEConfig /*@*/
   /*@ */
   public function getPreferMinified()  {  return $this->useMin;  }
   public function preferMinified( $b ) {  $this->useMin = $b;  } /*@*/
+
+
+  /*@ */
+  public function getEscapeFunc()  {  return $this->defaultEscapeFunc;  }
+  public function setEscapeFunc( $f ) {  $this->defaultEscapeFunc = $f;  } /*@*/
 
 
   public function _clone()

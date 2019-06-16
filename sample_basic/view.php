@@ -16,6 +16,8 @@ require '../src/WebPage.php';
 require '../src/SimpleControl.php';
 require '../src/DSEConfig.php';
 
+require '../src/tools.php';
+
 
 // Some config
 
@@ -42,12 +44,12 @@ $listData = [                     // or load from db
 ];
 
 
-// Make a view, add values            // You could add View( ..., DSEConfig::ESCAPE_ALL_VALUES ) which
+// Make a view, add values            // You could add View( ..., View::ESCAPE_ALL_VALUES ) which
                                       //   is htmlspecialchars() for all added values, or do it yourself
 $view = new View( 'includes/main' );  // The '.html' will be added => 'includes/main.html'
 $view->myVal = 'sample value';        // Just add what you need
 // $view->myVal2 = ...
-// $view->myVal2 = View::escape( $myStr );  // Escape helper
+// $view->myVal2 = escape( $myStr );  // Escape helper from tools.php or View::escape();
                                   
 
 // Add a list
@@ -60,8 +62,8 @@ $view->list1 = $listView;
 
 // Version 2
 
-$listView = new ListView();         // The sample above is just this code packed in a static method
-                                    // you might want use this version if you need 2 make something special
+$listView = new ListView();  // The sample above is just this code packed in a static method
+                             // you might want use this version if you need 2 make something special
 // /*
 foreach( $listData as $rowValues )
 {
@@ -76,7 +78,7 @@ $view->list2 = $listView;
 
 
 // Although these classes are simple, you can do complex things with them
-// You could also add: views - in a list - in a view - in a list
+// Add views - in a list - in a view - in a list
 
 $outerList = new ListView();
 

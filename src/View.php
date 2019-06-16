@@ -18,6 +18,10 @@ USAGE:
 class View extends ViewBase /*@*/
 {
 
+  const ESCAPE_ALL_VALUES = true;
+  const ESCAPE_NO_VALUE   = false;
+
+
   protected $dseScheme;              // use unusual names, so cant be confused with generic attributes
   protected $dseValues;
   protected $dseEscapeAllValues;
@@ -101,7 +105,6 @@ class View extends ViewBase /*@*/
     if( isset( $this->dseValues[$name]))
       return $this->dseValues[$name];
 
-    // return "## MISSING VALUE: $name ##";
     return '';
   }
 
