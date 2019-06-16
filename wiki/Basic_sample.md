@@ -5,7 +5,7 @@
 
 ## Basic sample
 
-Minimal sample, also showing some additional features. This only uses the classes **View** and **ListView**. For the advanced samples see [Readme](README.md). See also class comments in /src (API desc currently missing).
+Minimal sample. This only uses the 2 mist basic classes **View** and **ListView**. For advanced samples see [Readme](README.md).
 
 * **Run the code:** /sample_basic/view.php
 * **HTML code see below or:** /sample_basic/includes
