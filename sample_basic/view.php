@@ -75,6 +75,7 @@ foreach( $listData as $rowValues )
 $view->list2 = $listView;
 
 
+// Although these classes are simple, you can do complex things with them
 // You could also add: views - in a list - in a view - in a list
 
 $outerList = new ListView();

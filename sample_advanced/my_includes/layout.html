@@ -1,10 +1,29 @@
-<?php
+    <h1<?= self::printClass($this->h1Classes) ?>>Advanced sample</h1>
 
-use WAJ\Lib\Web\DamnSmallEngine\View;
+    <div class="row<?= self::addClasses($this->funClasses) ?>">
+      <div class="col-lg-12">
 
-require '../src/View.php';
+        <p><?= $this->myValue ?></p>
+        
+        <p><strong>Some static content from layout.html:</strong> Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit</p>
 
-?> 
-    <h1<?= View::printClasses($this->h1Classes) ?>><?= $this->headline ?></h1>
+        <p><?= $this->myValue2 ?></p>
 
-    <?= $this->table ?>
+      </div>
+      <div class="col-lg-12">
+
+        <?= $this->table ?>
+
+      </div>
+      <div class="col-lg-12">
+
+        <p>entry 2.2 is null, so there will be ""</p>
+        <p>
+          Bootstrap template used:
+          <a href="https://startbootstrap.com/templates/modern-business" target="_blank">Modern Business</a>
+          by <a href="https://startbootstrap.com" target="_blank">startbootstrap.com</a> (slightly modified see style_mode.css),
+          also have a look at <a href="https://getbootstrap.com/docs/4.3/examples" target="_blank">basic samples</a> by bootstrap
+        </p>
+
+      </div>
+    </div>

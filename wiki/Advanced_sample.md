@@ -7,12 +7,10 @@
 
 **... and building a bootstrap 4.3 table dynamically** (for every database table)
 
-**still debugging this one**
-
-This sample also adds some style and classes, and uses a "component", whock is a html block that needs special style and js files. These will be automatically included. See also class comments in /src (API desc currently missing).
+This sample also includes some style and adds classes dynamically.
 
 * **Run the code:** /sample_advanced/view.php
-* **HTML code see:** /sample_advanced/my_controls and /sample_advanced/my_includes
+* **HTML code see:** /sample_advanced/my_includes and /sample_advanced/my_controls
 
 ```php
 // Some config
@@ -28,7 +26,16 @@ $config->setDirPrefix( 'my_' );  // a folder prefix that you can leave out on ne
 
 // Data
 
-$dbRows = ...
+$dbRows = [                    // Demo data or load from db
+  0 => [
+    'col_1' => 'entry 1.1',
+    'col_2' => 'entry 1.2'
+  ],
+  1 => [
+    'col_1' => 'entry 2.1',
+    'col_2' => null
+  ]
+];
 
 
 // Build
@@ -39,39 +46,45 @@ $layout = $page->newView( 'includes/layout' );
 
 // Add some style dynamically (or do in html)
 
-$page->addStyleInclude( 'includes/styles/style.css' );
-$page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
-
+$page->addStyleInclude( 'includes/styles/add_style.css' );  // just a dummy file with a comment (for demo)
+$page->addStyle( 'body { font-size: 15px; }' );             // => page head <style></style>
 // the same for js use: addJSInclude() addJS()
 
 
-// Add some classes dynamically
+// Add some classes dynamically (just for fun)
 
-$layout->h1Classes = "some classes";
-// see my_includes/layout.html, use View's printClasses() or addClasses()
+$layout->h1Classes = "mt-4 mb-3";  // prints class="mt-4 mb-3" cause printClass() used in my_includes/layout.html
+                                   // see layout.html, use View's
+
+$layout->funClasses = "some fun classes";  // just for fun, see how addClasses() is used in my_includes/layout.html
+
+
+// Add content
+
+$layout->myValue  = 'My dynamic content 1';
+$layout->myValue2 = 'My dynamic content 2';
 
 
 // Table (dynamically)
 
 $table = $page->newSimpleControl( 'controls/table/view' );
 
-$this->tableClasses   = '';  // no additional classes
-$this->headClasses    = '';
-$this->headRowClasses = '';
-$this->bodyClasses    = '';
 
 // Table header
 
+$colNames = ['Column 1', 'Column 2'];  // Non-DB-Names for UI, load from somewhere ...
+
 $headCells = $page->newListView();
 
-foreach( $dbRows[0] as $name => $value )
+foreach( $colNames as $name => $value )
 {
   $headCell = $page->newView( 'controls/table/head_cell' );
   $headCell->content = $value;
   $headCells->addView( $headCell );
 }
 
-$table->headContent = $headCells;
+$table->addSubView( 'headContent', $headCells );
+
 
 // Table lines
 
@@ -81,7 +94,7 @@ foreach( $dbRows as $id => $dbRow )
 {
   $row = $page->newView( 'controls/table/row' );
   $cells = $page->newListView();
-  
+
   // Table cells
 
   $i = 0;
@@ -94,17 +107,16 @@ foreach( $dbRows as $id => $dbRow )
     else
       $cell = $page->newView( 'controls/table/cell' );
 
-    $cell->content = $value;
+    $cell->addSubView( 'content', $value );
     $cells->addView( $cell );
   }
     
-  $row->content = $cells;
+  $row->addSubView( 'content', $cells );
   $rows->addView( $row );
 }
 
-$table->bodyContent = $rows;
-
-$layout->content = $table;
+$table->addSubView( 'bodyContent', $rows );
+$layout->addSubView( 'table', $table );
 $page->attachContent( $layout );
 
 

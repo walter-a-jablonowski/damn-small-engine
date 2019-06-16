@@ -73,7 +73,7 @@ class WebPage extends View /*@*/
     if( $config->getPreferMinified() && file_exists( $s))
       $styleInc = $s;
 
-    $this->dseStyleInc[] = '<link href="' . $styleInc . '" rel="stylesheet">';
+    $this->dseStyleInc[] = '<link href="' . $config->getDirPrefix() . $styleInc . '" rel="stylesheet">';
   }
 
 
@@ -93,7 +93,7 @@ class WebPage extends View /*@*/
     if( $config->getPreferMinified() && file_exists( $s))
       $jsInc = $s;
 
-    $this->dseJSInc[] = '<script src="' . $jsInc . '"></script>';
+    $this->dseJSInc[] = '<script src="' . $config->getDirPrefix() . $jsInc . '"></script>';
   }
 
 

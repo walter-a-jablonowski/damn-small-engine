@@ -14,6 +14,8 @@ If you like run the sample code in /sample_normal, /sample_advanced and /sample_
 composer require walter-a-jablonowski/damn-small-engine
 ```
 
+> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
+
 **Table of contents**
 
 * [Compare it](https://github.com/walter-a-jablonowski/damn-small-engine#compare-it)
@@ -23,14 +25,12 @@ composer require walter-a-jablonowski/damn-small-engine
 * [Classes overview](https://github.com/walter-a-jablonowski/damn-small-engine#classes)
 * [License](https://github.com/walter-a-jablonowski/damn-small-engine#license)
 
-> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
+## Compare Damn Small Egine
 
-## Compare it
+... with popular templating systems:
 
-Popular third party engines (compare my engine):
-
-* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusualy syntax, but some nice features. All logic in code, like Damn Small Engine. The engine code seems too large, should be maintainable (just in case there are no updates).
-* [Blend]() (free) - 
+* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusualy syntax, could require some learning - but I like that class mapping feature. All logic in code, just like Damn Small Engine, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
+* [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their featues, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
 
 ## Features
 
@@ -50,19 +50,19 @@ Popular third party engines (compare my engine):
 
 ## Normal sample
 
-**Building a page and bootstrap 4.3 table**
+**Building bootstrap 4.3 a page and table**
 
 :grey_exclamation: There are more samples available
 
 * A much [simpler sample](wiki/Basic_sample.md), that used only the most basic 2 classes
-* [Advanced sample](wiki/Advanced_sample.md): style/js includes, add classes, dynamic table
+* [Advanced sample](wiki/Advanced_sample.md): style/js includes, add classes dynamically, dynamic table
 * [Component sample](wiki/Component_sample.md): automatically include style and/or js
 * [Misc samples](wiki/Misc_samples.md)
 
 This sample
 
 * **Run the code:** /sample_normal/view.php
-* **HTML code see:** /sample_normal/my_controls and /sample_normal/my_includes
+* **HTML code see:** /sample_normal/my_includes and /sample_normal/my_controls
 
 ```php
 // Some config

@@ -127,7 +127,7 @@ class View extends ViewBase /*@*/
   
   Render view
   
-  */
+   */
   public function render() /*@*/
   {
     // TASK: maybe add a func that ensures all values are set, at least ''
@@ -135,8 +135,6 @@ class View extends ViewBase /*@*/
     $config = DSEConfig::instance();
 
     $s = $config->getDirPrefix() . $this->dseScheme . '.' . $config->getViewFileEnding();
-
-    // !d( $s );
 
     ob_start();
     include( $s );

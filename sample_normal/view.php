@@ -16,15 +16,13 @@ require '../src/WebPage.php';
 require '../src/SimpleControl.php';
 require '../src/DSEConfig.php';
 
-require 'kint.phar';
-
 
 define('DEBUG', 'DEBUG');
 
 $env = DEBUG;
 
 
-// Building a page and bootstrap 4.3 table
+// Building bootstrap 4.3 a page and table
 
 // Some config
 

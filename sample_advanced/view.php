@@ -16,17 +16,13 @@ require '../src/WebPage.php';
 require '../src/SimpleControl.php';
 require '../src/DSEConfig.php';
 
-require 'kint.phar';
-
 
 define('DEBUG', 'DEBUG');
 
 $env = DEBUG;
 
 
-// Advanced sample and Building a bootstrap 4.3 table dynamically (for every database table)
-
-// This sample also adds style 2 page, and uses a "component", a html block that needs special style and js files. These will be automatically included. See API for more info **(currently missing)**.
+// Some advanced features and building a bootstrap 4.3 table dynamically (for every database table)
 
 
 // Some config
@@ -62,30 +58,33 @@ $layout = $page->newView( 'includes/layout' );
 
 // Add some style dynamically (or do in html)
 
-// $page->addStyleInclude( 'includes/styles/style.css' );                                 // Task:
-// $page->addStyle( 'body { font-size: 15px; }' );  // => page head <style></style>
-
+$page->addStyleInclude( 'includes/styles/add_style.css' );  // just a dummy file with a comment (for demo)
+$page->addStyle( 'body { font-size: 15px; }' );             // => page head <style></style>
 // the same for js use: addJSInclude() addJS()
 
 
-// Add some classes dynamically
+// Add some classes dynamically (just for fun)
 
-// $layout->h1Classes = "some classes";
-// see my_includes/layout.html, use View's printClasses() or addClasses()
+$layout->h1Classes = "mt-4 mb-3";  // prints class="mt-4 mb-3" cause printClass() used in my_includes/layout.html
+                                   // see layout.html, use View's
+
+$layout->funClasses = "some fun classes";  // just for fun, see how addClasses() is used in my_includes/layout.html
+
+
+// Add content
+
+$layout->myValue  = 'My dynamic content 1';
+$layout->myValue2 = 'My dynamic content 2';
 
 
 // Table (dynamically)
 
 $table = $page->newSimpleControl( 'controls/table/view' );
 
-// $table->tableClasses   = '';  // no additional classes
-// $table->headClasses    = '';
-// $table->headRowClasses = '';
-// $table->bodyClasses    = '';
 
 // Table header
 
-$colNames = ['Column 1', 'Column 2'];
+$colNames = ['Column 1', 'Column 2'];  // Non-DB-Names for UI, load from somewhere ...
 
 $headCells = $page->newListView();
 
@@ -98,6 +97,7 @@ foreach( $colNames as $name => $value )
 
 $table->addSubView( 'headContent', $headCells );
 
+
 // Table lines
 
 $rows = $page->newListView();
@@ -106,7 +106,7 @@ foreach( $dbRows as $id => $dbRow )
 {
   $row = $page->newView( 'controls/table/row' );
   $cells = $page->newListView();
-  
+
   // Table cells
 
   $i = 0;
@@ -128,12 +128,9 @@ foreach( $dbRows as $id => $dbRow )
 }
 
 $table->addSubView( 'bodyContent', $rows );
-$layout->addSubView( 'content', $table );
+$layout->addSubView( 'table', $table );
 $page->attachContent( $layout );
 
-
-// !d( $page ); 
-// var_dump( $page ); 
 
 echo $page->render();
 
