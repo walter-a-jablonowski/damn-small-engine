@@ -2,6 +2,8 @@
 
 **PHP low code templating system - small but powerful**
 
+> If you like visit my personal homepage: [walter-a-jablonowski.github.io](https://walter-a-jablonowski.github.io)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This was tested using PHP 7.1.9, should at leat run on 7.1.9 and above.
@@ -22,8 +24,6 @@ composer require walter-a-jablonowski/damn-small-engine
   * also includes samples overview
 * [Classes overview](https://github.com/walter-a-jablonowski/damn-small-engine#classes)
 * [License](https://github.com/walter-a-jablonowski/damn-small-engine#license)
-
-> If you like visit my personal homepage: https://walter-a-jablonowski.github.io
 
 ## Compare Damn Small Egine
 
