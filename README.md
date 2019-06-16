@@ -2,8 +2,6 @@
 
 **PHP low code templating system - small but powerful**
 
-> If you like visit my personal homepage: [walter-a-jablonowski.github.io](https://walter-a-jablonowski.github.io)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This was tested using PHP 7.1.9, should at leat run on 7.1.9 and above.
@@ -25,6 +23,8 @@ composer require walter-a-jablonowski/damn-small-engine
 * [Classes overview](https://github.com/walter-a-jablonowski/damn-small-engine#classes)
 * [License](https://github.com/walter-a-jablonowski/damn-small-engine#license)
 
+> If you like visit my personal homepage: [walter-a-jablonowski.github.io](https://walter-a-jablonowski.github.io)
+
 ## Compare Damn Small Egine
 
 ... with popular templating systems:
@@ -34,7 +34,8 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ## Features
 
-* **Small:** Just 2 small classes for basic use (can easily be modified), additional classes providing more features (small compared 2 third party engines)
+* **Small:** Just 2 small classes for basic use (can easily be modified)
+* additional classes providing more features (small compared 2 third party engines)
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
@@ -135,8 +136,8 @@ echo $page->render();
 * **SimpleControl:** A simple control that uses no style or JS (input, table, ...)
   * basically a synonym for `View`, uses DSEConfig's controlsFolder as additional folder prefix if set
 * **WebPage:** Builds a full web page, ability 2 add style, js and components
-  * A component is a piece of html that also needs styles and/or
-    javascript. This class is able 2 add these in head and body automatically.
+  * A component is a piece of html that also needs styles and/or javascript
+  * This class is able 2 add these in head and body automatically
 * **ComponentBase:** Base class for a component that needs style/js includes and contains implementation
   * or include a component using `$webPage->newComponent()` if you don't need implementation
 
