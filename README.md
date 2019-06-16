@@ -29,7 +29,7 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ... with popular templating systems:
 
-* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusualy syntax, could require some learning - but I like that class mapping feature. All logic in code, just like Damn Small Engine, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
+* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, just like Damn Small Engine, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
 * [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their featues, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
 
 ## Features
