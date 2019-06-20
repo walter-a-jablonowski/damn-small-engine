@@ -111,7 +111,7 @@ foreach( $dbRows as $id => $dbRow )
     $cells->addView( $cell );
   }
     
-  $row->addSubView( 'content', $cells );
+  $cell->content = $value;
   $rows->addView( $row );
 }
 

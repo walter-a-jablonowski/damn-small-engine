@@ -119,7 +119,7 @@ foreach( $dbRows as $id => $dbRow )
     else
       $cell = $page->newView( 'controls/table/cell' );
 
-    $cell->addSubView( 'content', $value );
+    $cell->content = $value;
     $cells->addView( $cell );
   }
     
