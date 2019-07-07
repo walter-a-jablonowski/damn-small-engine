@@ -152,7 +152,7 @@ echo $page->render();
 
 Copyright (C) Walter A. Jablonowski 2018-2019, MIT [License](LICENSE)
 
-This library is build upon PHP (license see [credits](credits.md)) and has no further dependecies.\
+This library is build upon PHP (license see [credits](credits.md)) and has no further dependencies.\
 Licenses of third party software used in samples see [credits](credits.md).
 
 
