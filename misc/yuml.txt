@@ -1,0 +1,11 @@
+https://yuml.me/diagram/scruffy/class/samples
+
+%2F%2F Cool Class Diagram, [Customer|-forname:string;surname:string|doShiz()]<>-orders*>[Order], [Order]++-0..*>[LineItem], [Order]-[note:Aggregate root{bg:wheat}]
+
+
+[ViewBase{bg:orange}]^--[ListView{bg:wheat}]
+[ViewBase{bg:orange}]^--[View{bg:wheat}]
+[View{bg:orange}]^--[ComponentBase{bg:wheat}]
+[View{bg:orange}]^--[SimpleControl{bg:wheat}]
+[View{bg:orange}]^--[WebPage{bg:wheat}]
+[DSEConfig{bg:tan}]

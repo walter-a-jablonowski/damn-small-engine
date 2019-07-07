@@ -173,13 +173,13 @@ class View extends ViewBase /*@*/
 
   /*@
   
-  Returns " class1 class2" or "" if no class
+  Returns " string" or ""
   
   */
-  public static function addClasses( $classNames ) /*@*/
+  public static function addString( $s ) /*@*/
   {
-    if( $classNames )
-      return ' ' . $classNames;
+    if( $s )
+      return ' ' . $s;
     else
       return '';
   }
@@ -187,10 +187,28 @@ class View extends ViewBase /*@*/
 
   /*@
   
-  Returns class="class1 class2" or "" if no class
+  printString() would just be <?= $this->s ?>
+  
+  @*/
+
+
+  /*@
+  
+  See addString()
   
   */
-  public static function printClass( $classNames ) /*@*/
+  public static function addClasses( $classNames ) /*@*/
+  {
+    return self::addString( $classNames );
+  }
+
+
+  /*@
+  
+  Returns class="string1 string2" or ""
+  
+  */
+  public static function printClasses( $classNames ) /*@*/
   {
     if( $classNames )
       return ' class="' . $classNames . '"';

@@ -116,27 +116,6 @@ class WebPage extends View /*@*/
     return $view;
   }
 
-  /*@ */
-  public function newSimpleControl( $scheme, $escapeAllValues = false ) /*@*/
-  {
-    $view = new SimpleControl( $scheme, $escapeAllValues );
-    $view->setController($this);
-    $this->dseAllView[] = $view;
-
-    return $view;
-  }
-
-  /*@ */
-  public function newListView() /*@*/
-  {
-    $list = new ListView();
-    $list->setController($this);
-    $this->dseAllView[] = $list;
-
-    return $list;
-  }
-
-
   /*@
   
   Synonym for addView(), use for large block of HTML
@@ -160,6 +139,28 @@ class WebPage extends View /*@*/
   }
 
 
+  /*@ */
+  public function newListView() /*@*/
+  {
+    $list = new ListView();
+    $list->setController($this);
+    $this->dseAllView[] = $list;
+
+    return $list;
+  }
+
+
+  /*@ */
+  public function newSimpleControl( $scheme, $escapeAllValues = false ) /*@*/
+  {
+    $view = new SimpleControl( $scheme, $escapeAllValues );
+    $view->setController($this);
+    $this->dseAllView[] = $view;
+
+    return $view;
+  }
+
+
   /*@
 
   Add a component which is html that has own style and/or js
@@ -180,7 +181,7 @@ class WebPage extends View /*@*/
 
   /*@
 
-  Add a component which is html that has own style and/or js
+  Add a component that also has implementation
   
   */
   public function newDerivedComponent( $class, ...$args ) /*@*/
@@ -190,6 +191,20 @@ class WebPage extends View /*@*/
     
     $this->loadDependencies( $c->getScheme() );
 
+    return $c;
+  }
+
+
+  /*@
+
+  Add a class derived from a DSE class which is no component
+  
+  */
+  public function newSpecView( $class, ...$args ) /*@*/
+  {
+    
+    $c = new $class( ...$args );
+    
     return $c;
   }
 

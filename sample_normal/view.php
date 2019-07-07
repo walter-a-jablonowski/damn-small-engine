@@ -22,7 +22,7 @@ define('DEBUG', 'DEBUG');
 $env = DEBUG;
 
 
-// Building bootstrap 4.3 a page and table
+// Building a bootstrap 4.3 webpage and table
 
 // Some config
 

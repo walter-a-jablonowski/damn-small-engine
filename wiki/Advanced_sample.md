@@ -53,7 +53,7 @@ $page->addStyle( 'body { font-size: 15px; }' );             // => page head <sty
 
 // Add some classes dynamically (just for fun)
 
-$layout->h1Classes = "mt-4 mb-3";  // prints class="mt-4 mb-3" cause printClass() used in my_includes/layout.html
+$layout->h1Classes = "mt-4 mb-3";  // prints class="mt-4 mb-3" cause printClasses() used in my_includes/layout.html
                                    //   see layout.html, use View's
 
 $layout->funClasses = "some fun classes";  // just for fun, see how addClasses() is used in my_includes/layout.html

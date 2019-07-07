@@ -5,7 +5,7 @@
 
 ## Basic sample
 
-Minimal sample. This only uses the 2 mist basic classes **View** and **ListView**. For advanced samples see [Readme](README.md).
+Minimal sample. This only uses the 2 most basic classes **View** and **ListView**. For advanced samples see [Readme](README.md).
 
 * **Run the code:** /sample_basic/view.php
 * **HTML code see below or:** /sample_basic/includes
@@ -39,7 +39,7 @@ $view->myVal = 'sample value';        // Just add what you need
 
 // Version 1
 
-$listView = ListView::buildList( 'includes/list1_entry', $listData );
+$listView = ListView::buildList( 'includes/list_entry', $listData );
 $view->list1 = $listView;
 
 
