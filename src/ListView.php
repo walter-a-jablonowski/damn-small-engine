@@ -24,7 +24,7 @@ class ListView extends ViewBase /*@*/
 
   /*@ Builds a list class with View instances from given values */
   
-  public static function buildList( $scheme, $values, $escapeAllValues = false ) /*@*/
+  public static function buildList( $scheme, $values, $options = 0x0 ) /*@*/
   {
     $config = DSEConfig::instance();
 
@@ -37,7 +37,7 @@ class ListView extends ViewBase /*@*/
 
     foreach( $values as $rowValues )
     {
-      $entryView = new View( $scheme, $escapeAllValues );
+      $entryView = new View( $scheme, $options );
       $entryView->setValues( $rowValues );
       
       $listView->addView( $entryView );
@@ -66,11 +66,14 @@ class ListView extends ViewBase /*@*/
   public function render( $addBr = true ) /*@*/
   {
     $s = '';
-    foreach( $this->dseList as $view )
-    {
-      if( $s !== '' && $addBr)  $s .= "\n";
-      $s .= $view->render();
-    }
+
+    if( $this->dseList )
+
+      foreach( $this->dseList as $view )
+      {
+        if( $s !== '' && $addBr)  $s .= "\n";
+        $s .= $view->render();
+      }
 
     return $s;
   }

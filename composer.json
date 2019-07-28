@@ -23,8 +23,7 @@
 
     "autoload": {
         "psr-4": {
-          "WAJ\\Lib\\Web\\DamnSmallEngine\\": "src/",
-          "WAJ\\Lib\\Web\\DamnSmallEngine\\Spec\\": "src/spec/"
+          "WAJ\\Lib\\Web\\DamnSmallEngine\\": "src/"
         }
     }
 }

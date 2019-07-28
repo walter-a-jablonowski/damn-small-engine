@@ -17,12 +17,13 @@ USAGE:
 */
 class View extends ViewBase /*@*/
 {
-
-  const ESCAPE_ALL_VALUES = true;
-  const ESCAPE_NO_VALUE   = false;
+  const EXT_DIFFERS       = 0x1;
+  const ESCAPE_ALL_VALUES = 0x2;
+  const STRING_MODE       = 0x3;
 
 
   protected $dseScheme;              // use unusual names, so cant be confused with generic attributes
+  protected $dseExtDifferes;
   protected $dseValues;
   protected $dseEscapeAllValues;
 
@@ -35,12 +36,20 @@ class View extends ViewBase /*@*/
     $escapeAllValues: if true all values should be html escaped on add
 
   */
-  public function __construct( $scheme, $escapeAllValues = false ) /*@*/
+  public function __construct( $scheme, $options = 0x0) /*@*/
   {
+    $extDiffers      = $options & self::EXT_DIFFERS  ?  true  :  false;
+    $escapeAllValues = $options & self::ESCAPE_ALL_VALUES  ?  true  :  false;
 
     $config = DSEConfig::instance();
 
-    $s = $config->getDirPrefix() . "$scheme." . $config->getViewFileEnding();
+    // if( strpos( $scheme, '.js') !== false )
+
+    $this->dseExtDiffers = $extDiffers;
+
+    // Usage of ending is in render, this is just for err handling
+    $s = $config->getDirPrefix() . $scheme;
+    if( ! $extDiffers )  $s .= '.' . $config->getViewFileEnding();
 
     if( ! file_exists( $s ))
       throw new \Exception( "Damn Small Engine: html file missing $s" );
@@ -133,11 +142,13 @@ class View extends ViewBase /*@*/
    */
   public function render() /*@*/
   {
-    // TASK: maybe add a func that ensures all values are set, at least ''
+    // TASK: maybe add a func that ensures all values are set, at least '' as option
 
     $config = DSEConfig::instance();
 
-    $s = $config->getDirPrefix() . $this->dseScheme . '.' . $config->getViewFileEnding();
+    // $s = $config->getDirPrefix() . $this->dseScheme . '.' . $config->getViewFileEnding();
+    $s = $config->getDirPrefix() . $this->dseScheme;
+    if( ! $this->dseExtDiffers )  $s .= '.' . $config->getViewFileEnding();
 
     ob_start();
     include( $s );
@@ -154,67 +165,6 @@ class View extends ViewBase /*@*/
     return $this->render();
   }
 
-
-  /*@
-  
-  Just tools for outside use
-  -------------------------------------------------------@*/
-  
-  /*@
-  
-  Escape helper
-  
-  */
-  public static function escape( $s ) /*@*/
-  {
-    return htmlspecialchars( $s );
-  }
-
-
-  /*@
-  
-  Returns " string" or ""
-  
-  */
-  public static function addString( $s ) /*@*/
-  {
-    if( $s )
-      return ' ' . $s;
-    else
-      return '';
-  }
-
-
-  /*@
-  
-  printString() would just be <?= $this->s ?>
-  
-  @*/
-
-
-  /*@
-  
-  See addString()
-  
-  */
-  public static function addClasses( $classNames ) /*@*/
-  {
-    return self::addString( $classNames );
-  }
-
-
-  /*@
-  
-  Returns class="string1 string2" or ""
-  
-  */
-  public static function printClasses( $classNames ) /*@*/
-  {
-    if( $classNames )
-      return ' class="' . $classNames . '"';
-    else
-      return '';
-  }
 }
 
 ?>

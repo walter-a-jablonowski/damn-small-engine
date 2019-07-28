@@ -53,7 +53,7 @@ class WebPage extends View /*@*/
   */
   public function __construct( $scheme ) /*@*/
   {
-    parent::__construct( $scheme, false );
+    parent::__construct( $scheme, 0x0 );
 
     $this->styleIncludes = [];  // this is in html
     $this->pageStyle     = [];
@@ -189,22 +189,8 @@ class WebPage extends View /*@*/
     
     $c = new $class( ...$args );
     
-    $this->loadDependencies( $c->getScheme() );
+    // $this->loadDependencies( $c->getScheme() );  // derived class should handle
 
-    return $c;
-  }
-
-
-  /*@
-
-  Add a class derived from a DSE class which is no component
-  
-  */
-  public function newSpecView( $class, ...$args ) /*@*/
-  {
-    
-    $c = new $class( ...$args );
-    
     return $c;
   }
 

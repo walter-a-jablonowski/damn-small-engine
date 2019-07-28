@@ -21,7 +21,7 @@ class DSEConfig /*@*/
 
   protected $useMin = false;
 
-  protected $defaultEscapeFunc = false;
+  protected $escapeFunc = false;
 
   private static $instance;
 
@@ -35,16 +35,16 @@ class DSEConfig /*@*/
     return self::$instance;
   }
 
-/*
-  public function __construct( $scheme, $escapeAllValues = false ) /*@* /
+
+  public function __construct() /*@*/
   {
+    $this->escapeFunc = function( $value ) {
 
-    $this->defaultEscapeFunc = function( $value ) {
-
-      return htmlspecialchars( $value );
+      // return htmlspecialchars( $value );
+      return htmlspecialchars( $value, ENT_COMPAT, 'UTF-8' );
     };
   }
-*/
+
 
   /*@
 
@@ -80,8 +80,8 @@ class DSEConfig /*@*/
 
 
   /*@ */
-  public function getEscapeFunc()  {  return $this->defaultEscapeFunc;  }
-  public function setEscapeFunc( $f ) {  $this->defaultEscapeFunc = $f;  } /*@*/
+  public function getEscapeFunc()  {  return $this->escapeFunc;  }
+  public function setEscapeFunc( $f ) {  $this->escapeFunc = $f;  } /*@*/
 
 
   public function _clone()

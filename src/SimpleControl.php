@@ -28,12 +28,12 @@ class SimpleControl extends View /*@*/
     see parent
 
   */
-  public function __construct( $scheme, $escapeAllValues = false ) /*@*/
+  public function __construct( $scheme, $options = 0x0 ) /*@*/
   {
     $config = DSEConfig::instance();
     $scheme = $config->getControlsFolder() . $scheme;
 
-    parent::__construct( $scheme, $escapeAllValues );
+    parent::__construct( $scheme, $options );
   }
 }
 
