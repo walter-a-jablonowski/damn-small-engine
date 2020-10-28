@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Version 0.5 - This was tested using PHP 7.1.9, should run at leat on 7.1.9 and above. \
+Version 0.1 - This was tested using PHP 7.1.9, should run at leat on 7.1.9 and above. \
 See also: [Migrations](migrations.md) - **some samples still need debuging**
 
 A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared to popular templating systems. Use less code, achieve more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](wiki/Basic_sample.md)), although there are more classes providing features for WebPage and controls ([see samples below](https://github.com/walter-a-jablonowski/damn-small-engine#normal-sample)).
