@@ -7,7 +7,7 @@
 Version 0.5 - This was tested using PHP 7.1.9, should run at leat on 7.1.9 and above. \
 See also: [Migrations](migrations.md) - **some samples still need debuging**
 
-A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared 2 popular templating systems. Use less code, achive more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](wiki/Basic_sample.md)), although there are more classes providing features: WebPage and Control ([see samples below](https://github.com/walter-a-jablonowski/damn-small-engine#normal-sample)).
+A simple PHP templating system, based on an idea that I saw somewhere on the internet about 2 years ago. Basically, this uses PHP's output buffering and magic methods. It is a truly awesome concept, because the code is so tiny compared to popular templating systems. Use less code, achieve more! You can easily read that small code and modify it for your needs. I improved the basic idea and added some features. Have a look at the very small classes View and ListView files in /src. These are enough (shown in [Basic sample](wiki/Basic_sample.md)), although there are more classes providing features for WebPage and controls ([see samples below](https://github.com/walter-a-jablonowski/damn-small-engine#normal-sample)).
 
 If you like run the sample code in /sample_normal, /sample_advanced and /sample_basic.
 
@@ -30,13 +30,13 @@ composer require walter-a-jablonowski/damn-small-engine
 
 ... with popular templating systems:
 
-* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, that's nice. The engine code seems too large, should be maintainable (just in case there are no updates).
-* [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Again: I like some of their features, but I'm unsure if this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare 2 [Damn Small Engine's few classes](src/).
+* [Mustache PHP](https://github.com/bobthecow/mustache.php) (free) - Unusual syntax, could require some learning - but I like that class mapping feature. All logic in code, that's nice. The engine code seems too large, hard to maintain in case there are no updates.
+* [Laravel Blade](https://laravel.com/docs/5.8/blade) (free) - Some nice features, but unsure if all of this is really needed. See how much code they [are using](https://github.com/laravel/framework/tree/5.8/src/Illuminate/View) and compare [Damn Small Engine's few classes](src/).
 
 ## Features
 
 * **Small:** Just 2 small classes for basic use (can easily be modified)
-* additional classes providing more features (small compared 2 third party engines)
+* additional classes providing more features (small compared with third party engines)
 * **Build nested views** and/or lists with data
 * **Add styles/js** in a `WebPage`
 * **Automatically import** component specific styles and js in a web page
@@ -45,7 +45,7 @@ composer require walter-a-jablonowski/damn-small-engine
 * **All logic in code!** Template files don't need any control structures (as it should be)
   * Why the heck do people invent a new programming lang in their templating systems while they already have one?!
   * In fact logic in templates ***is possible***, see [misc samples](wiki/Misc_samples.md) (no recommendation)
-* You don't have 2 learn a new syntax => **no problems fixing syntax bugs**
+* You don't have to learn a new syntax => **no problems fixing syntax bugs**
   * just use PHP's syntax that you know well, you can easily compose your view
 * ... and **all PHP language features** are available
 
